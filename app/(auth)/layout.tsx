@@ -28,13 +28,13 @@ export default function AuthLayout({
         Back
       </Link>
       <div className="flex w-full max-w-sm flex-col gap-6">
-        <Link
+        {/* <Link
           href="/"
           className="flex items-center gap-2 self-center font-medium"
         >
-          {/* <Image src={Logo} alt="Logo" width={32} height={32} /> */}
+          <Image src={Logo} alt="Logo" width={32} height={32} />
           LMS.
-        </Link>
+        </Link> */}
         {children}
 
         <div className="text-balance text-center text-xs text-muted-foreground">
