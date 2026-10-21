@@ -1,39 +1,21 @@
-"use client";
+import { redirect } from "next/navigation";
+import { getSession } from "@/lib/get-session";
+import HomeClient from "@/components/home-client";
 
-import { ThemeToggle } from "@/components/ui/themeToggle";
-import Image from "next/image";
-import {
-  ThemeToggleButton,
-  useThemeTransition,
-} from "@/components/ui/shadcn-io/theme-toggle-button";
+export default async function HomePage() {
+  const session = await getSession();
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+  if (!session) {
+    redirect("/login");
+  }
 
-export default function Home() {
-  const { theme, setTheme } = useTheme();
-  const { startTransition } = useThemeTransition();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const toggleTheme = () => {
-    startTransition(() => {
-      setTheme(theme === "light" ? "dark" : "light");
-    });
-  };
   return (
-    <>
-      <h1>Hello, world!</h1>
-      {mounted && (
-        <ThemeToggleButton
-          theme={theme === "light" ? "light" : "dark"}
-          variant="circle"
-          onClick={toggleTheme}
-        />
-      )}
-    </>
+    <HomeClient
+      user={{
+        name: session.user.name,
+        image: session.user.image,
+        email: session.user.email,
+      }}
+    />
   );
 }

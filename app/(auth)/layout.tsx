@@ -17,7 +17,7 @@ export default function AuthLayout({
 
   return (
     <div className="relative flex min-h-svh flex-col items-center justify-center">
-      <Link
+      {/* <Link
         href="/"
         className={buttonVariants({
           variant: "outline",
@@ -26,7 +26,7 @@ export default function AuthLayout({
       >
         <ArrowLeft className="size-4" />
         Back
-      </Link>
+      </Link> */}
       <div className="flex w-full max-w-sm flex-col gap-6">
         {/* <Link
           href="/"

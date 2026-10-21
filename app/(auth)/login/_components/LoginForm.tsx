@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { authClient } from "@/lib/auth-client";
 // import { authClient } from "@/lib/auth-client";
 import { Loader, Loader2, Send } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -21,8 +22,8 @@ export function LoginForm() {
   const router = useRouter();
   const [githubPending, startGithubTransition] = useTransition();
   const [googlePending, startGoogleTransition] = useTransition();
-  const [emailPending, startEmailTransition] = useTransition();
-  const [email, setEmail] = useState("");
+  // const [emailPending, startEmailTransition] = useTransition();
+  // const [email, setEmail] = useState("");
 
   // async function signinWithGitHub() {
   //   // await authClient.sign("github");
@@ -45,44 +46,24 @@ export function LoginForm() {
   // }
 
   async function signinWithGoogle() {
-    // startGoogleTransition(async () => {
-    //   await authClient.signIn.social({
-    //     provider: "google",
-    //     callbackURL: "/",
-    //     fetchOptions: {
-    //       onSuccess: () => {
-    //         console.log("Successfully signed in with Google");
-    //         toast.success("Successfully signed in with Google");
-    //       },
-    //       onError: (error) => {
-    //         console.log(error);
-    //         toast.error("Internal Server Error", { position: "top-center" });
-    //       },
-    //     },
-    //   });
-    // });
+    startGoogleTransition(async () => {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+        fetchOptions: {
+          onSuccess: () => {
+            // console.log("Successfully signed in with Google");
+            // toast.success("Successfully signed in with Google");
+          },
+          onError: (error) => {
+            console.log(error);
+            toast.error("Internal Server Error", { position: "top-center" });
+          },
+        },
+      });
+    });
   }
 
-  function signInWithEmail() {
-    // startEmailTransition(async () => {
-    //   await authClient.emailOtp.sendVerificationOtp({
-    //     email: email,
-    //     type: "sign-in",
-    //     fetchOptions: {
-    //       onSuccess: () => {
-    //         toast.success("Verification email sent", {
-    //           position: "top-center",
-    //         });
-    //         router.push(`/verify-request?email=${email}`);
-    //       },
-    //       onError: (error) => {
-    //         console.log(error);
-    //         toast.error("Internal Server Error", { position: "top-center" });
-    //       },
-    //     },
-    //   });
-    // });
-  }
   return (
     <Card>
       <CardHeader>
@@ -111,7 +92,7 @@ export function LoginForm() {
           )}
         </Button>
 
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+        {/* <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
           <span className="relative z-10 bg-card px-2 text-muted-foreground">
             Or continue with
           </span>
@@ -142,7 +123,7 @@ export function LoginForm() {
               </>
             )}
           </Button>
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   );
