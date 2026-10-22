@@ -174,4 +174,32 @@ it("retrieves trips for the signed-in user", async () => {
 });
 
 
+it("updates a trip belonging to the signed-in user", async () => {
+  getSessionMock.mockResolvedValue({
+    user: { id: "user-1" },
+  });
+
+  tripUpdateManyMock.mockResolvedValue({ count: 1 });
+
+  const result = await updateTrip("trip-1", {
+    title: "Updated Lalibela Trip",
+  });
+
+  expect(tripUpdateManyMock).toHaveBeenCalledWith(
+    expect.objectContaining({
+      where: {
+        id: "trip-1",
+        userId: "user-1",
+      },
+      data: expect.objectContaining({
+        title: "Updated Lalibela Trip",
+      }),
+    }),
+  );
+
+  expect(result).toEqual({ success: true });
+});
+
+
+
 });
