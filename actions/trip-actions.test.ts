@@ -121,5 +121,33 @@ describe("Trip server actions", () => {
     expect(result.success).toBe(false);
   });
 
+it("creates a trip for the signed-in user", async () => {
+  getSessionMock.mockResolvedValue({
+    user: { id: "user-1" },
+  });
+
+  tripCreateMock.mockResolvedValue({ id: "trip-1" });
+
+  const result = await createTrip({
+    title: "Lalibela Trip",
+  });
+
+  expect(tripCreateMock).toHaveBeenCalledWith(
+    expect.objectContaining({
+      data: expect.objectContaining({
+        title: "Lalibela Trip",
+        userId: "user-1",
+      }),
+      select: { id: true },
+    }),
+  );
+
+  expect(result).toEqual({
+    success: true,
+    tripId: "trip-1",
+  });
+});
+
+
 
 });
