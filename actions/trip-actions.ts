@@ -53,3 +53,40 @@ export async function createTrip(
     return { success: false, error: "Failed to create trip." };
   }
 }
+
+export async function getMyTrips() {
+  try {
+    const session = await getSession();
+
+    if (!session?.user?.id) {
+      return { success: false as const, error: "You must be signed in." };
+    }
+
+    const trips = await prisma.trip.findMany({
+      where: { userId: session.user.id },
+      orderBy: { createdAt: "desc" },
+      include: {
+        tripDestinations: {
+          orderBy: { order: "asc" },
+          include: {
+            destination: {
+              select: {
+                id: true,
+                name: true,
+                slug: true,
+                region: true,
+                imageUrl: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return { success: true as const, trips };
+  } catch (error) {
+    console.error("Get my trips failed:", error);
+    return { success: false as const, error: "Failed to retrieve your trips." };
+  }
+}
+
