@@ -201,5 +201,24 @@ it("updates a trip belonging to the signed-in user", async () => {
 });
 
 
+it("deletes a trip belonging to the signed-in user", async () => {
+  getSessionMock.mockResolvedValue({
+    user: { id: "user-1" },
+  });
+
+  tripDeleteManyMock.mockResolvedValue({ count: 1 });
+
+  const result = await deleteTrip("trip-1");
+
+  expect(tripDeleteManyMock).toHaveBeenCalledWith({
+    where: {
+      id: "trip-1",
+      userId: "user-1",
+    },
+  });
+
+  expect(result).toEqual({ success: true });
+});
+
 
 });
