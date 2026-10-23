@@ -37,4 +37,4 @@ export const createTripSchema = z
     },
   );
 
-export type CreateTripInput = z.infer<typeof createTripSchema>;
+export type CreateTripInput = z.input<typeof createTripSchema>;
