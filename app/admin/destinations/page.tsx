@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { Suspense } from "react";
+import DeleteDestinationButton from "@/components/admin/delete-destination-button";
 
 export default async function AdminDestinationsPage() {
   return (
@@ -226,6 +227,10 @@ async function DestinationList() {
                     <Pencil size={15} />
                     Edit
                   </Link>
+                  <DeleteDestinationButton
+                    destinationId={destination.id}
+                    destinationName={destination.name}
+                  />
                 </div>
               </article>
             ))}
