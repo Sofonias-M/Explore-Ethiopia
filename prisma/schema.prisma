@@ -24,6 +24,8 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  role          String    @default("user")
+  trips         Trip[]
 
   @@unique([email])
   @@map("user")
@@ -75,4 +77,64 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Destination {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  region          String
+  description     String   @db.Text
+  imageUrl        String?
+  estimatedCost   Decimal? @db.Decimal(10, 2)
+  bestTimeToVisit String?
+  isPublished     Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  tripDestinations TripDestination[]
+
+  @@index([region])
+  @@index([isPublished])
+  @@map("destination")
+}
+
+model Trip {
+  id              String    @id @default(cuid())
+  title           String
+  description     String?   @db.Text
+  startDate       DateTime?
+  endDate         DateTime?
+  estimatedBudget Decimal?  @db.Decimal(10, 2)
+  currency        String    @default("ETB")
+  notes           String?   @db.Text
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tripDestinations TripDestination[]
+
+  @@index([userId])
+  @@index([startDate])
+  @@map("trip")
+}
+
+model TripDestination {
+  id            String   @id @default(cuid())
+  tripId        String
+  destinationId String
+  order         Int      @default(0)
+  plannedDays   Int?
+  notes         String?  @db.Text
+  createdAt     DateTime @default(now())
+
+  trip        Trip        @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Restrict)
+
+  @@unique([tripId, destinationId])
+  @@unique([tripId, order])
+  @@index([destinationId])
+  @@map("trip_destination")
 }
