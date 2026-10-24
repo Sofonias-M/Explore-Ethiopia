@@ -7,7 +7,6 @@ import {
     editTrip,
   } from "../lib/redux/feature/trips/tripSlice";
 import { store } from "../lib/redux/store";
-import Link from "next/link";
 
 type Trip = {
     id: number;
@@ -74,12 +73,6 @@ type Trip = {
   return (
 
     <form onSubmit={handleSubmit} className="space-y-5">
-       <Link
-  href="/dashboard"
-  className="mt-5 inline-block font-semibold text-green-800 hover:underline"
->
-  ← Back to Dashboard
-</Link>
       <div className="flex flex-col gap-2">
         <label
           htmlFor="title"

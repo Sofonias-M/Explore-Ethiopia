@@ -1,4 +1,4 @@
- export type Destination = {
+export type Destination = {
   id: string;
   name: string;
   slug: string;
@@ -7,9 +7,12 @@
   description: string;
   imageUrl: string;
   bestTimeToVisit: string;
+  duration?: string;
+  locationDetail?: string;
   estimatedCost: number;
   rating: number;
   reviews: number;
+  gallery?: string[];
 };
 
 export const destinations: Destination[] = [
@@ -20,12 +23,21 @@ export const destinations: Destination[] = [
     region: "Amhara",
     category: "Historical",
     description:
-      "Discover extraordinary rock-hewn churches carved into the mountains of Ethiopia. Lalibela is one of the country's most remarkable historical destinations.",
-    imageUrl: "https://images.unsplash.com/photo-1646647689780-308bd6f4f84d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
-    bestTimeToVisit: "October – March",
+      "Lalibela is home to one of the most extraordinary architectural wonders in the world — a group of 11 medieval rock-hewn churches, carved directly into the mountainside in the 12th and 13th centuries. It's a UNESCO World Heritage Site and a must-visit for anyone interested in history, culture and spirituality.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1646647689780-308bd6f4f84d?q=80&w=1170&auto=format&fit=crop",
+    bestTimeToVisit: "Oct – Mar",
+    duration: "2–3 days",
+    locationDetail: "Amhara, Ethiopia",
     estimatedCost: 120,
     rating: 4.9,
     reviews: 124,
+    gallery: [
+      "https://images.unsplash.com/photo-1646647689780-308bd6f4f84d?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+    ],
   },
   {
     id: "2",
@@ -34,12 +46,21 @@ export const destinations: Destination[] = [
     region: "Amhara",
     category: "Adventure",
     description:
-      "Explore dramatic mountain peaks, deep valleys, breathtaking viewpoints, and unique Ethiopian wildlife.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXrJ5cBmoTNQndPEEsXGRJbRgmaaRYITmP4_iywxcfjw&s=10",
-    bestTimeToVisit: "October – April",
+      "Explore dramatic mountain peaks, deep valleys, breathtaking viewpoints, and unique Ethiopian wildlife such as the Gelada baboon and Walia ibex in this stunning national park.",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXrJ5cBmoTNQndPEEsXGRJbRgmaaRYITmP4_iywxcfjw&s=10",
+    bestTimeToVisit: "Oct – Apr",
+    duration: "3–5 days",
+    locationDetail: "Amhara, Ethiopia",
     estimatedCost: 180,
     rating: 4.8,
     reviews: 98,
+    gallery: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXrJ5cBmoTNQndPEEsXGRJbRgmaaRYITmP4_iywxcfjw&s=10",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    ],
   },
   {
     id: "3",
@@ -48,12 +69,21 @@ export const destinations: Destination[] = [
     region: "Afar",
     category: "Natural",
     description:
-      "Experience one of the world's most unusual landscapes, with colorful mineral formations, salt plains, and volcanic scenery.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXPWh3tyB8jb_BnC82Y5pNEuOffqLaPNk2g1XubZrilQ&s=10",
-    bestTimeToVisit: "November – February",
+      "Experience one of the world's most unusual landscapes, with colorful mineral formations, active volcanoes, vast salt flats, and otherworldly geological wonders.",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXPWh3tyB8jb_BnC82Y5pNEuOffqLaPNk2g1XubZrilQ&s=10",
+    bestTimeToVisit: "Nov – Feb",
+    duration: "3–4 days",
+    locationDetail: "Afar, Ethiopia",
     estimatedCost: 250,
     rating: 4.7,
     reviews: 76,
+    gallery: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXPWh3tyB8jb_BnC82Y5pNEuOffqLaPNk2g1XubZrilQ&s=10",
+      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80",
+    ],
   },
   {
     id: "4",
@@ -62,12 +92,21 @@ export const destinations: Destination[] = [
     region: "Amhara",
     category: "Historical",
     description:
-      "Visit the historic castles and royal compounds of Gondar, a city known for its remarkable Ethiopian architecture.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBNZuyJwQvvOUviXqpmInvA9sUedZUgd4I6KYoKJwc0A&s",
-    bestTimeToVisit: "October – March",
+      "Visit the historic stone castles and royal compounds of Fasil Ghebbi in Gondar, often described as the Camelot of Africa, rich with imperial Ethiopian history.",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSTMG3SAUISerllapPqFKR8aS4UyjatrR3ELR9PF3uuw&s=10",
+    bestTimeToVisit: "Oct – Mar",
+    duration: "1–2 days",
+    locationDetail: "Amhara, Ethiopia",
     estimatedCost: 100,
     rating: 4.6,
     reviews: 65,
+    gallery: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSTMG3SAUISerllapPqFKR8aS4UyjatrR3ELR9PF3uuw&s=10",
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=800&q=80",
+    ],
   },
   {
     id: "5",
@@ -76,12 +115,21 @@ export const destinations: Destination[] = [
     region: "Tigray",
     category: "Cultural",
     description:
-      "Explore ancient obelisks, archaeological sites, and the history of one of Ethiopia's most important ancient kingdoms.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn_Y_GGAoafczZk4rjtqgAI26ZEgQC5cavzP-2LsDzkw&s=10",
-    bestTimeToVisit: "October – March",
+      "Explore towering ancient obelisks, subterranean tombs, and the legendary resting place of the Ark of the Covenant in one of Africa's greatest ancient empires.",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3dQrS6TQKxouiZOoytYgvPHs6TALEe907_-JHVOc-Eg&s=10",
+    bestTimeToVisit: "Oct – Mar",
+    duration: "1–2 days",
+    locationDetail: "Tigray, Ethiopia",
     estimatedCost: 90,
     rating: 4.5,
     reviews: 52,
+    gallery: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3dQrS6TQKxouiZOoytYgvPHs6TALEe907_-JHVOc-Eg&s=10",
+      "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80",
+    ],
   },
   {
     id: "6",
@@ -90,12 +138,21 @@ export const destinations: Destination[] = [
     region: "Amhara",
     category: "Natural",
     description:
-      "Enjoy the shores of Lake Tana, peaceful waterfront scenery, and excursions to the famous Blue Nile Falls.",
-    imageUrl: "data:image/jpeg;base64,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",
-    bestTimeToVisit: "October – March",
+      "Enjoy the palm-fringed shores of Lake Tana, ancient island monasteries with centuries-old wall paintings, and excursions to the majestic Blue Nile Falls.",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIPi3DJ3Uc5ijAen8uNDeoNstLDUtLjt-mI_vv9_3LjA&s=10",
+    bestTimeToVisit: "Oct – Mar",
+    duration: "2 days",
+    locationDetail: "Amhara, Ethiopia",
     estimatedCost: 85,
     rating: 4.4,
     reviews: 48,
+    gallery: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIPi3DJ3Uc5ijAen8uNDeoNstLDUtLjt-mI_vv9_3LjA&s=10",
+      "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+    ],
   },
 ];
 

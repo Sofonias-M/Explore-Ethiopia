@@ -1,36 +1,30 @@
-import Link from "next/link";
-import DestinationGrid from "@/components/destinations/DestinationGrid";
 import SiteNavbar from "@/components/site-navbar";
 import SiteFooter from "@/components/site-footer";
+import DestinationGrid from "@/components/destinations/DestinationGrid";
 
 export default function DestinationsPage() {
   return (
-    <>
-    <SiteNavbar />
-    <main className="min-h-screen bg-[#faf9f6]">
-      <section className="bg-emerald-950 px-6 py-16 text-white sm:px-12">
-        <div className="mx-auto max-w-7xl">
-          <Link href="/" className="text-sm text-emerald-200 hover:underline">
-            ← Back to home
-          </Link>
-          <p className="mt-8 text-sm font-semibold uppercase tracking-[0.2em] text-emerald-200">
-            Discover Ethiopia
-          </p>
-          <h1 className="mt-3 text-4xl font-bold sm:text-5xl">
-            Explore Destinations
-          </h1>
-          <p className="mt-4 max-w-2xl leading-7 text-white/80">
-            Find your next adventure, from ancient historical sites to
-            breathtaking landscapes and unforgettable cultural experiences.
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen bg-[#faf9f6] text-gray-900 flex flex-col justify-between">
+      <SiteNavbar />
 
-      <section className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:px-12">
-        <DestinationGrid />
-        <SiteFooter />
-      </section>
-    </main>
-    </>
+      <main className="flex-1">
+        <div className="mx-auto max-w-7xl px-6 py-10 sm:px-10 lg:px-12">
+          {/* Page Header matching mockup */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              All Destinations
+            </h1>
+            <p className="mt-2 text-sm text-gray-500 sm:text-base">
+              Explore the most beautiful and culturally rich places in Ethiopia.
+            </p>
+          </div>
+
+          {/* Search, Category Filters, and 3-column Grid */}
+          <DestinationGrid columns={3} showFilters={true} />
+        </div>
+      </main>
+
+      <SiteFooter />
+    </div>
   );
 }
