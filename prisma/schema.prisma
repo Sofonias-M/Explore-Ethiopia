@@ -88,6 +88,7 @@ model Destination {
   imageUrl        String?
   estimatedCost   Decimal? @db.Decimal(10, 2)
   bestTimeToVisit String?
+  category        DestinationCategory @default(Cultural)
   isPublished     Boolean  @default(true)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -137,4 +138,11 @@ model TripDestination {
   @@unique([tripId, order])
   @@index([destinationId])
   @@map("trip_destination")
+}
+
+enum DestinationCategory {
+  Historical
+  Natural
+  Cultural
+  Adventure
 }
