@@ -3,7 +3,7 @@ import "server-only";
 import { prisma } from "@/lib/db";
 import { requireAdmin } from "./require-admin";
 
-export async function adminGetDestination() {
+export async function adminGetDestinations() {
   // await new Promise((resolve) => setTimeout(resolve, 2000));
   //   await requireAdmin();
 
@@ -30,5 +30,5 @@ export async function adminGetDestination() {
 }
 
 export type AdminDestinationType = Awaited<
-  ReturnType<typeof adminGetDestination>
+  ReturnType<typeof adminGetDestinations>
 >[0];

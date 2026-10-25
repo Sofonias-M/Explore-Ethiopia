@@ -110,8 +110,8 @@ export function DestinationCard({ destination }: { destination: Destination }) {
           </h3>
         </div>
         <a
-          href={`/admin/destinations/${destination.slug}`}
-          aria-label={`Explore ${destination.slug}`}
+          href={`/admin/destinations/${destination.id}/edit`}
+          aria-label={`Explore ${destination.title}`}
           className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-black transition group-hover:bg-brand"
         >
           <ArrowUpRight size={19} />

@@ -1,9 +1,9 @@
-import { adminGetDestination } from "@/app/data/admin/admin-get-destinations";
+import { adminGetDestinations } from "@/app/data/admin/admin-get-destinations";
 import { DestinationCard } from "./_components/DestinationCard";
 // import { DestinationCard } from "@/components/admin/DestinationCard";
 
 export default async function DestinationsPage() {
-  const data = await adminGetDestination();
+  const data = await adminGetDestinations();
 
   return (
     <div className="mx-auto w-full max-w-6xl">

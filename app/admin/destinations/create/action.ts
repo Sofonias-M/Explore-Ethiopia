@@ -10,18 +10,6 @@ export async function CreateDestination(
 ): Promise<APIResponse> {
   const session = await requireAdmin();
   try {
-    // const req = await request();
-    // const decision = await aj.protect(req, {
-    //   fingerprint: session.user.id,
-    // });
-
-    // if (decision.isDenied()) {
-    //   return {
-    //     status: "error",
-    //     message: "Too many requests. Please try again later.",
-    //   };
-    // }
-
     const validation = locationSchema.safeParse(values);
     if (!validation.success) {
       return {
