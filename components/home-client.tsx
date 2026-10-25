@@ -1,20 +1,18 @@
 "use client";
 
-// import Navbar from "@/components/navbar";
-import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useSignOut } from "@/hooks/user-signout";
 import {
   ArrowRight,
   ArrowUpRight,
   Compass,
+  LogIn,
   LogOut,
   Mountain,
   Star,
   UserRound,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
 import localFont from "next/font/local";
 import Navbar from "./navbar";
 
@@ -27,7 +25,7 @@ type HomeClientProps = {
     name: string;
     email: string;
     image?: string | null;
-  };
+  } | null;
 };
 
 const destinations = [
@@ -55,31 +53,7 @@ const destinations = [
 ];
 
 export default function HomeClient({ user }: HomeClientProps) {
-  const router = useRouter();
-
-  const [loggingOut, setLoggingOut] = useState(false);
-
-  const handleLogout = async () => {
-    setLoggingOut(true);
-
-    try {
-      await authClient.signOut({
-        fetchOptions: {
-          onSuccess: () => {
-            router.replace("/login");
-            router.refresh();
-          },
-          onError: (ctx) => {
-            toast.error(ctx.error.message || "Failed to log out");
-          },
-        },
-      });
-    } catch {
-      toast.error("Something went wrong while logging out.");
-    } finally {
-      setLoggingOut(false);
-    }
-  };
+  const signOut = useSignOut();
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -97,7 +71,7 @@ export default function HomeClient({ user }: HomeClientProps) {
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/35 via-black/10 to-black/65" />
 
         {/* Navigation */}
-        <Navbar user={user} onLogout={handleLogout} loggingOut={loggingOut} />
+        <Navbar user={user} />
 
         {/* Hero content */}
         <div className="relative mx-auto flex min-h-[570px] max-w-[1200px] flex-col items-center justify-center px-5 pb-20 pt-12 text-center text-white sm:min-h-[620px] lg:min-h-[650px]">
@@ -364,40 +338,53 @@ export default function HomeClient({ user }: HomeClientProps) {
               </a>
             ))}
 
-            <div className="mt-7 flex items-center justify-between gap-4">
-              <div className="flex min-w-0 items-center gap-3">
-                {user.image ? (
-                  <img
-                    src={user.image}
-                    alt={user.name}
-                    referrerPolicy="no-referrer"
-                    className="size-10 rounded-full object-cover"
-                  />
-                ) : (
-                  <div className="flex size-10 items-center justify-center rounded-full bg-muted">
-                    <UserRound size={18} />
+            {user ? (
+              <div className="mt-7 flex items-center justify-between gap-4">
+                <div className="flex min-w-0 items-center gap-3">
+                  {user.image ? (
+                    <img
+                      src={user.image}
+                      alt={user.name}
+                      referrerPolicy="no-referrer"
+                      className="size-10 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex size-10 items-center justify-center rounded-full bg-muted">
+                      <UserRound size={18} />
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium">
+                      {user.name || "Traveler"}
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Ready for your next adventure?
+                    </p>
                   </div>
-                )}
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-medium">
-                    {user.name || "Traveler"}
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Ready for your next adventure?
-                  </p>
                 </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={signOut}
+                  className="shrink-0 rounded-full"
+                >
+                  <LogOut size={14} />
+                  Log out
+                </Button>
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLogout}
-                disabled={loggingOut}
-                className="shrink-0 rounded-full"
-              >
-                <LogOut size={14} />
-                {loggingOut ? "Logging out..." : "Log out"}
-              </Button>
-            </div>
+            ) : (
+              <div className="mt-7 flex items-center justify-between gap-4">
+                <p className="text-xs text-muted-foreground">
+                  Log in to start planning your trips.
+                </p>
+                <Button size="sm" className="shrink-0 rounded-full">
+                  <Link href="/login">
+                    <LogIn size={14} />
+                    Log in
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
         </section>
       </div>
