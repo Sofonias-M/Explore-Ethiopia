@@ -48,10 +48,9 @@ export const locationSchema = z.object({
 
   // Mirrors the "max 4 pictures" rule; the DB column is String[]
   imageUrls: z
-    .array(z.string().url({ message: "Each image must be a valid URL" }))
+    .array(z.string().min(1))
     .min(1, { message: "Add at least one picture" })
     .max(4, { message: "You can upload at most 4 pictures" }),
-
   // z.coerce handles string -> Date/number from form inputs
   startDate: z.coerce.date({ message: "Start date is required" }),
 

@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Sparkles, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -16,7 +15,10 @@ import {
   type LocationFormValues,
   type LocationSchemaType,
 } from "@/lib/zodSchema";
-import Uploader from "@/components/file-uploader/Uploader";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { MultiImageUploader } from "@/components/file-uploader/Uploader";
+// import { MultiImageUploader } from "@/components/file-uploader/MultiImageUploader";
+// import Uploader from "@/components/file-uploader/Uploader";
 
 const MAX_IMAGES = 4;
 
@@ -42,6 +44,7 @@ function FieldError({ message }: { message?: string }) {
 export default function LocationCreationPage() {
   const [imageInput, setImageInput] = useState("");
   const [imageError, setImageError] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const form = useForm<LocationFormValues, unknown, LocationSchemaType>({
     resolver: zodResolver(locationSchema),
@@ -348,58 +351,20 @@ export default function LocationCreationPage() {
               Paste image URLs for now.
             </p>
           </div>
-          <Uploader />
-          {/* 
-
-          <div className="flex gap-2">
-            <Input
-              value={imageInput}
-              onChange={(e) => setImageInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  addImage();
-                }
-              }}
-              placeholder="https://..."
-              aria-label="Image URL"
-            />
-            <Button
-              type="button"
-              variant="outline"
-              onClick={addImage}
-              disabled={imageUrls.length >= MAX_IMAGES}
-            >
-              Add
-            </Button>
-          </div>
-          <FieldError message={imageError || errors.imageUrls?.message} />
-
-          {imageUrls.length > 0 && (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {imageUrls.map((url) => (
-                <div
-                  key={url}
-                  className="group relative aspect-square overflow-hidden rounded-xl bg-muted"
-                >
-                  <img
-                    src={url}
-                    alt="Location preview"
-                    className="size-full object-cover"
-                  />
-                  <button
-                    type="button"
-                    aria-label="Remove picture"
-                    onClick={() => removeImage(url)}
-                    className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition group-hover:opacity-100 focus-visible:opacity-100"
-                  >
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )} */}
         </section>
+        <Controller
+          control={control}
+          name="imageUrls"
+          render={({ field }) => (
+            <MultiImageUploader
+              value={field.value ?? []}
+              onChange={field.onChange}
+              max={MAX_IMAGES}
+              onBusyChange={setUploading}
+            />
+          )}
+        />
+        <FieldError message={errors.imageUrls?.message} />
 
         {/* Extras */}
         <section className="space-y-4">
@@ -429,7 +394,7 @@ export default function LocationCreationPage() {
           <Button type="button" variant="outline" onClick={() => reset()}>
             Reset
           </Button>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting || uploading}>
             {isSubmitting ? "Saving..." : "Create location"}
           </Button>
         </div>
