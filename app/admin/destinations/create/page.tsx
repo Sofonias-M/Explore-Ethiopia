@@ -16,6 +16,7 @@ import {
   type LocationFormValues,
   type LocationSchemaType,
 } from "@/lib/zodSchema";
+import Uploader from "@/components/file-uploader/Uploader";
 
 const MAX_IMAGES = 4;
 
@@ -344,9 +345,11 @@ export default function LocationCreationPage() {
               Pictures ({imageUrls.length}/{MAX_IMAGES})
             </h2>
             <p className="text-xs text-muted-foreground">
-              Paste image URLs for now. File upload can replace this later.
+              Paste image URLs for now.
             </p>
           </div>
+          <Uploader />
+          {/* 
 
           <div className="flex gap-2">
             <Input
@@ -395,7 +398,7 @@ export default function LocationCreationPage() {
                 </div>
               ))}
             </div>
-          )}
+          )} */}
         </section>
 
         {/* Extras */}
