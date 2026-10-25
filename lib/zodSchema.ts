@@ -63,13 +63,13 @@ export const locationSchema = z.object({
 
   price: z.coerce.number().min(1, { message: "Price must be at least 1" }),
 
-  currency: z
-    .string()
-    .length(3, { message: "Use a 3-letter currency code" })
-    .transform((v) => v.toUpperCase())
-    .default("ETB"),
+  //   currency: z
+  //     .string()
+  //     .length(3, { message: "Use a 3-letter currency code" })
+  //     .transform((v) => v.toUpperCase())
+  //     .default("ETB"),
 
-  isPublished: z.boolean().default(true),
+  //   isPublished: z.boolean().default(true),
 
   // The tour guide is a User; optional until one is assigned
   tourGuideId: z.string().min(1).nullable().optional(),
