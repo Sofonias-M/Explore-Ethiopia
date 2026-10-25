@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState, useEffect } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { destinations } from "@/lib/destinations";
 import DestinationCard from "./destinationCard";
@@ -18,20 +18,35 @@ function DestinationGridInner({
   columns = 3,
 }: DestinationGridProps) {
   const searchParams = useSearchParams();
-  const initialSearch = searchParams.get("search") || "";
-  const initialCategory = searchParams.get("category") || "All";
+  const searchParam = searchParams.get("search") || "";
+  const categoryParam = searchParams.get("category") || "All";
 
+  return (
+    <DestinationGridContent
+      key={`${searchParam}:${categoryParam}`}
+      limit={limit}
+      showFilters={showFilters}
+      columns={columns}
+      initialSearch={searchParam}
+      initialCategory={categoryParam}
+    />
+  );
+}
+
+type DestinationGridContentProps = DestinationGridProps & {
+  initialSearch: string;
+  initialCategory: string;
+};
+
+function DestinationGridContent({
+  limit,
+  showFilters = true,
+  columns = 3,
+  initialSearch,
+  initialCategory,
+}: DestinationGridContentProps) {
   const [search, setSearch] = useState(initialSearch);
   const [category, setCategory] = useState(initialCategory);
-
-  useEffect(() => {
-    if (searchParams.get("search") !== null) {
-      setSearch(searchParams.get("search") || "");
-    }
-    if (searchParams.get("category") !== null) {
-      setCategory(searchParams.get("category") || "All");
-    }
-  }, [searchParams]);
 
   const filteredDestinations = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -86,7 +101,7 @@ function DestinationGridInner({
             No destinations found
           </h3>
           <p className="mt-1 text-sm text-gray-500 max-w-sm mx-auto">
-            We couldn't find any destination matching &quot;{search}&quot;. Try a different keyword or category.
+            We couldn&apos;t find any destination matching &quot;{search}&quot;. Try a different keyword or category.
           </p>
           <button
             type="button"

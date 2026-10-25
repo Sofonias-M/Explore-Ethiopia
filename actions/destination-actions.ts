@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { Prisma } from "@/lib/generated/prisma/client";
 import { prisma } from "@/lib/db";
 import { destinationSchema } from "@/lib/validations/destination";
-import { getSession } from "@/lib/get-session";
+import { isAdminAuthorized } from "@/lib/dal";
 
 export type DestinationActionState = {
   success: boolean;
@@ -13,21 +13,6 @@ export type DestinationActionState = {
 };
 export type CreateDestinationState = DestinationActionState;
 export type UpdateDestinationState = DestinationActionState;
-
-async function isAdminAuthorized(): Promise<boolean> {
-const session = await getSession();
-
-if (!session?.user?.email) {
-return false;
-}
-
-const adminEmails = (process.env.ADMIN_EMAILS ?? "")
-.split(",")
-.map((email) => email.trim().toLowerCase())
-.filter(Boolean);
-
-return adminEmails.includes(session.user.email.trim().toLowerCase());
-}
 
 function parseDestinationForm(formData: FormData) {
 return destinationSchema.safeParse({

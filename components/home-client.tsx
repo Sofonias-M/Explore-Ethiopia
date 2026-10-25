@@ -6,13 +6,14 @@ import {
 } from "@/components/ui/shadcn-io/theme-toggle-button";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { useTheme } from "next-themes";
-import { LogOut, UserRound,LayoutDashboard,
+import { LogOut, UserRound,
   MapPin,
   Map,
   PlusCircle, } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { toast } from "sonner";
 import TripSummary from "@/app/componets/TripSummary";
 
@@ -34,12 +35,12 @@ export default function HomeClient({ user }: HomeClientProps) {
   const { startTransition } = useThemeTransition();
   const router = useRouter();
 
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   const [loggingOut, setLoggingOut] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleTheme = () => {
     startTransition(() => {
@@ -121,10 +122,13 @@ export default function HomeClient({ user }: HomeClientProps) {
           <header className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               {user.image ? (
-                <img
+                <Image
                   src={user.image}
                   alt={`${user.name}'s Google profile`}
                   referrerPolicy="no-referrer"
+                  width={40}
+                  height={40}
+                  unoptimized
                   className="size-10 rounded-full object-cover"
                 />
               ) : (

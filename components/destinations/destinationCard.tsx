@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Star } from "lucide-react";
 import type { Destination } from "@/lib/destinations";
 
@@ -21,7 +22,7 @@ export default function DestinationCard({
     >
       <div className="overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm transition group-hover:shadow-md">
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
-          <img
+          <Image
             src={imgSrc}
             alt={`${destination.name} in ${destination.region}, Ethiopia`}
             onError={() => {
@@ -30,8 +31,10 @@ export default function DestinationCard({
                 "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80"
               );
             }}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-            loading="lazy"
+            fill
+            unoptimized
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition duration-500 group-hover:scale-105"
           />
         </div>
 
