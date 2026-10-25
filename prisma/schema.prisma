@@ -27,10 +27,14 @@ model User {
   role          String    @default("user")
   trips         Trip[]
 
+  bookings   Booking[]
+  locations  Location[] @relation("GuidedLocations")
+  banned     Boolean?   @default(false)
+  banReason  String?
+  banExpires DateTime?
+
   @@unique([email])
   @@map("user")
-  bookings Booking[]
-  locations Location[] @relation("GuidedLocations")
 }
 
 model Session {
@@ -43,6 +47,8 @@ model Session {
   userAgent String?
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  impersonatedBy String?
 
   @@unique([token])
   @@index([userId])
@@ -82,18 +88,18 @@ model Verification {
 }
 
 model Destination {
-  id              String   @id @default(cuid())
+  id              String              @id @default(cuid())
   name            String
-  slug            String   @unique
+  slug            String              @unique
   region          String
-  description     String   @db.Text
+  description     String              @db.Text
   imageUrl        String?
-  estimatedCost   Decimal? @db.Decimal(10, 2)
+  estimatedCost   Decimal?            @db.Decimal(10, 2)
   bestTimeToVisit String?
   category        DestinationCategory @default(Cultural)
-  isPublished     Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  isPublished     Boolean             @default(true)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
 
   tripDestinations TripDestination[]
 
@@ -156,21 +162,21 @@ enum BookingStatus {
 }
 
 model Location {
-  id           String   @id @default(cuid())
+  id           String              @id @default(cuid())
   title        String
-  slug         String   @unique
-  description  String   @db.Text
-  place        String                 // "Miami, USA"
-  coordinates  Json                   // [{ "lat": 18, "lng": 14 }, { "lat": 48, "lng": 97 }]
-  imageUrls    String[]               // max 4, enforced in the app
+  slug         String              @unique
+  description  String              @db.Text
+  place        String // "Miami, USA"
+  coordinates  Json // [{ "lat": 18, "lng": 14 }, { "lat": 48, "lng": 97 }]
+  imageUrls    String[] // max 4, enforced in the app
   startDate    DateTime
-  durationDays Int                    // end date = startDate + durationDays
-  price        Decimal  @db.Decimal(10, 2)
-  currency     String   @default("ETB")
-  isPublished  Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  category        DestinationCategory @default(Cultural)
+  durationDays Int // end date = startDate + durationDays
+  price        Decimal             @db.Decimal(10, 2)
+  currency     String              @default("ETB")
+  isPublished  Boolean             @default(true)
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  category     DestinationCategory @default(Cultural)
 
   tourGuideId String?
   tourGuide   User?   @relation("GuidedLocations", fields: [tourGuideId], references: [id], onDelete: SetNull)

@@ -1,8 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, Sparkles, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { Loader2, Plus, Sparkles, Trash2 } from "lucide-react";
+import { startTransition, useState, useTransition } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,9 @@ import {
 } from "@/lib/zodSchema";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { MultiImageUploader } from "@/components/file-uploader/Uploader";
+import { CreateDestination } from "./action";
+import { tryCatch } from "@/hooks/try-catch";
+import { useRouter } from "next/navigation";
 // import { MultiImageUploader } from "@/components/file-uploader/MultiImageUploader";
 // import Uploader from "@/components/file-uploader/Uploader";
 
@@ -42,9 +45,11 @@ function FieldError({ message }: { message?: string }) {
 }
 
 export default function LocationCreationPage() {
-  const [imageInput, setImageInput] = useState("");
-  const [imageError, setImageError] = useState("");
+  // const [imageInput, setImageInput] = useState("");
+  // const [imageError, setImageError] = useState("");
+  const [isPending, startTransition] = useTransition();
   const [uploading, setUploading] = useState(false);
+  const router = useRouter();
 
   const form = useForm<LocationFormValues, unknown, LocationSchemaType>({
     resolver: zodResolver(locationSchema),
@@ -80,44 +85,59 @@ export default function LocationCreationPage() {
 
   const imageUrls = watch("imageUrls") ?? [];
 
-  const addImage = () => {
-    const url = imageInput.trim();
-    setImageError("");
+  // const addImage = () => {
+  //   const url = imageInput.trim();
+  //   setImageError("");
 
-    try {
-      new URL(url);
-    } catch {
-      setImageError("Enter a valid image URL");
-      return;
-    }
-    if (imageUrls.length >= MAX_IMAGES) {
-      setImageError(`You can add at most ${MAX_IMAGES} pictures`);
-      return;
-    }
-    if (imageUrls.includes(url)) {
-      setImageError("That picture is already added");
-      return;
-    }
+  //   try {
+  //     new URL(url);
+  //   } catch {
+  //     setImageError("Enter a valid image URL");
+  //     return;
+  //   }
+  //   if (imageUrls.length >= MAX_IMAGES) {
+  //     setImageError(`You can add at most ${MAX_IMAGES} pictures`);
+  //     return;
+  //   }
+  //   if (imageUrls.includes(url)) {
+  //     setImageError("That picture is already added");
+  //     return;
+  //   }
 
-    setValue("imageUrls", [...imageUrls, url], {
-      shouldValidate: true,
-      shouldDirty: true,
+  //   setValue("imageUrls", [...imageUrls, url], {
+  //     shouldValidate: true,
+  //     shouldDirty: true,
+  //   });
+  //   setImageInput("");
+  // };
+
+  // const removeImage = (url: string) => {
+  //   setValue(
+  //     "imageUrls",
+  //     imageUrls.filter((u) => u !== url),
+  //     { shouldValidate: true, shouldDirty: true },
+  //   );
+  // };
+
+  const onSubmit = (values: LocationSchemaType) => {
+    // console.log("Location payload:", values);
+    // toast.success("Form is valid. Backend isn't connected yet.");
+    // reset();
+    startTransition(async () => {
+      const { data, error } = await tryCatch(CreateDestination(values));
+
+      if (error) {
+        toast.error("An unexpected error occured");
+      }
+
+      if (data?.status === "success") {
+        toast.success(data.message);
+        reset();
+        router.push("/admin/destinations");
+      } else if (data?.status === "error") {
+        toast.error(data.message);
+      }
     });
-    setImageInput("");
-  };
-
-  const removeImage = (url: string) => {
-    setValue(
-      "imageUrls",
-      imageUrls.filter((u) => u !== url),
-      { shouldValidate: true, shouldDirty: true },
-    );
-  };
-
-  const onSubmit = async (values: LocationSchemaType) => {
-    console.log("Location payload:", values);
-    toast.success("Form is valid. Backend isn't connected yet.");
-    reset();
   };
 
   return (
@@ -395,7 +415,13 @@ export default function LocationCreationPage() {
             Reset
           </Button>
           <Button type="submit" disabled={isSubmitting || uploading}>
-            {isSubmitting ? "Saving..." : "Create location"}
+            {isSubmitting || isPending ? (
+              <>
+                Saving... <Loader2 className="animate-spin ml-1" />{" "}
+              </>
+            ) : (
+              <span>Create Destination</span>
+            )}
           </Button>
         </div>
       </form>

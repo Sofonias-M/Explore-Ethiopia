@@ -1,5 +1,6 @@
 // import { requireAdmin } from "@/app/data/admin/require-admin";
 // import { requireUser } from "@/app/data/user/require-user";
+import { requireAdmin } from "@/app/data/admin/require-admin";
 import { S3 } from "@/lib/S3Client";
 // import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
 // import { env } from "@/lib/env";
@@ -29,9 +30,7 @@ export const fileUploadSchema = z.object({
 });
 
 export async function POST(request: Request) {
-  // const session = await auth.api.getSession({ headers: await headers() });
-
-  //   const session = await requireUser();
+  // const session = await requireAdmin();
   try {
     const body = await request.json();
 
