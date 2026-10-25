@@ -48,7 +48,7 @@ const data = {
     },
     {
       title: "Users",
-      url: "/users",
+      url: "/admin/users",
       icon: <UsersIcon />,
     },
     {

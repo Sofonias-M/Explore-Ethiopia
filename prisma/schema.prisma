@@ -29,6 +29,8 @@ model User {
 
   @@unique([email])
   @@map("user")
+  bookings Booking[]
+  locations Location[] @relation("GuidedLocations")
 }
 
 model Session {
@@ -145,4 +147,55 @@ enum DestinationCategory {
   Natural
   Cultural
   Adventure
+}
+
+enum BookingStatus {
+  Pending
+  Active
+  Cancelled
+}
+
+model Location {
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique
+  description  String   @db.Text
+  place        String                 // "Miami, USA"
+  coordinates  Json                   // [{ "lat": 18, "lng": 14 }, { "lat": 48, "lng": 97 }]
+  imageUrls    String[]               // max 4, enforced in the app
+  startDate    DateTime
+  durationDays Int                    // end date = startDate + durationDays
+  price        Decimal  @db.Decimal(10, 2)
+  currency     String   @default("ETB")
+  isPublished  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  category        DestinationCategory @default(Cultural)
+
+  tourGuideId String?
+  tourGuide   User?   @relation("GuidedLocations", fields: [tourGuideId], references: [id], onDelete: SetNull)
+
+  bookings Booking[]
+
+  @@index([startDate])
+  @@index([isPublished])
+  @@map("location")
+}
+
+model Booking {
+  id        String        @id @default(cuid())
+  status    BookingStatus @default(Pending)
+  amount    Decimal       @db.Decimal(10, 2)
+  currency  String        @default("ETB")
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  locationId String
+  location   Location @relation(fields: [locationId], references: [id], onDelete: Restrict)
+
+  @@index([userId])
+  @@index([locationId])
+  @@map("booking")
 }
