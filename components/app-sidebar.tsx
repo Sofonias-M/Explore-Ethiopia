@@ -53,7 +53,7 @@ const data = {
     },
     {
       title: "Desinations",
-      url: "/destinations",
+      url: "/admin/destinations",
       icon: <MapPin />,
     },
     // {
