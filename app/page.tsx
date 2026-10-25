@@ -4,6 +4,7 @@ import SiteFooter from "@/components/site-footer";
 import DestinationGrid from "@/components/destinations/DestinationGrid";
 import HeroSearch from "@/components/hero-search";
 import { Compass, Landmark, Mountain, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
@@ -13,10 +14,13 @@ export default function HomePage() {
       <main className="flex-1">
         {/* HERO SECTION */}
         <section className="relative flex min-h-[520px] items-center overflow-hidden bg-stone-900 sm:min-h-[580px] lg:min-h-[640px]">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=2200&q=90"
             alt="Majestic Ethiopian landscape with dramatic green mountain peaks"
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            fill
+            unoptimized
+            priority
+            className="object-cover object-center"
           />
 
           {/* Dark gradient overlay to ensure text contrast */}

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Star,
@@ -28,35 +29,42 @@ export default function DestinationDetailView({
   const [activeTab, setActiveTab] = useState<
     "Overview" | "Gallery" | "Location" | "Reviews"
   >("Overview");
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [heroImageSrc, setHeroImageSrc] = useState(destination.imageUrl);
   const [copied, setCopied] = useState(false);
-
-  // Check and sync wishlist with localStorage
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const saved = localStorage.getItem(`wishlist_${destination.id}`);
-        if (saved === "true") {
-          setIsWishlisted(true);
-        }
-      } catch {
-        // localStorage not accessible
-      }
+  const wishlistKey = `wishlist_${destination.id}`;
+  const subscribeToWishlist = useCallback(
+    (onStoreChange: () => void) => {
+      window.addEventListener("storage", onStoreChange);
+      window.addEventListener(wishlistKey, onStoreChange);
+      return () => {
+        window.removeEventListener("storage", onStoreChange);
+        window.removeEventListener(wishlistKey, onStoreChange);
+      };
+    },
+    [wishlistKey]
+  );
+  const getWishlistSnapshot = useCallback(() => {
+    try {
+      return window.localStorage.getItem(wishlistKey) === "true";
+    } catch {
+      return false;
     }
-  }, [destination.id]);
-
+  }, [wishlistKey]);
+  const isWishlisted = useSyncExternalStore(
+    subscribeToWishlist,
+    getWishlistSnapshot,
+    () => false
+  );
 
   const handleToggleWishlist = () => {
     const nextState = !isWishlisted;
-    setIsWishlisted(nextState);
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem(`wishlist_${destination.id}`, String(nextState));
-      } catch {
-        // localStorage not accessible
-      }
+    try {
+      localStorage.setItem(wishlistKey, String(nextState));
+    } catch {
+      toast.error("Unable to update your wishlist in this browser.");
+      return;
     }
+    window.dispatchEvent(new Event(wishlistKey));
 
     if (nextState) {
       toast.success(`${destination.name} saved to your wishlist!`);
@@ -103,7 +111,7 @@ export default function DestinationDetailView({
       {/* Hero Banner with Title & Meta */}
       <div className="relative overflow-hidden rounded-3xl bg-stone-900 shadow-md">
         <div className="relative h-72 w-full sm:h-96 md:h-[440px]">
-          <img
+          <Image
             src={heroImageSrc}
             alt={`${destination.name} in ${destination.region}, Ethiopia`}
             onError={() => {
@@ -111,7 +119,11 @@ export default function DestinationDetailView({
                 "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80"
               );
             }}
-            className="h-full w-full object-cover object-center"
+            fill
+            unoptimized
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
           />
 
           {/* Dark gradient for text readability */}
@@ -274,11 +286,14 @@ export default function DestinationDetailView({
               <p className="text-sm text-gray-600">
                 Featured view of {destination.name}.
               </p>
-              <div className="max-w-2xl overflow-hidden rounded-2xl bg-gray-100">
-                <img
+              <div className="relative aspect-[16/10] max-w-2xl overflow-hidden rounded-2xl bg-gray-100">
+                <Image
                   src={destination.imageUrl}
                   alt={`${destination.name} in ${destination.region}, Ethiopia`}
-                  className="aspect-[16/10] w-full object-cover"
+                  fill
+                  unoptimized
+                  sizes="(max-width: 768px) 100vw, 672px"
+                  className="object-cover"
                 />
               </div>
             </div>

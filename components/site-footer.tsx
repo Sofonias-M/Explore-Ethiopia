@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { connection } from "next/server";
 import { Mountain } from "lucide-react";
 
-export default function SiteFooter() {
+export default async function SiteFooter() {
+  await connection();
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="border-t border-gray-200 bg-white text-gray-600">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:px-10">
@@ -88,7 +92,7 @@ export default function SiteFooter() {
 
       <div className="border-t border-gray-100 bg-[#faf9f6] py-5 px-6">
         <div className="mx-auto flex max-w-7xl flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400 lg:px-10">
-          <p>© {new Date().getFullYear()} Explore Ethiopia. All rights reserved.</p>
+          <p>© {currentYear} Explore Ethiopia. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/" className="hover:text-gray-600 transition">
               Privacy Policy

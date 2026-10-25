@@ -15,10 +15,15 @@ export interface ThemeToggleButtonProps {
   onClick?: () => void;
 }
 
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void) => { finished: Promise<void> };
+};
+
 export const useThemeTransition = () => {
   const startTransition = useCallback((updateFn: () => void) => {
-    if ("startViewTransition" in document) {
-      (document as any).startViewTransition(updateFn);
+    const transitionDocument = document as ViewTransitionDocument;
+    if (transitionDocument.startViewTransition) {
+      transitionDocument.startViewTransition(updateFn);
     } else {
       updateFn();
     }
@@ -129,7 +134,7 @@ export const ThemeToggleButton = ({
     }, 3000);
 
     onClick?.();
-  }, [onClick, variant, theme]);
+  }, [onClick, variant]);
 
   return (
     <Button
