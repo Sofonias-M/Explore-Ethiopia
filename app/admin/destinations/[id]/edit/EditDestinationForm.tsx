@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  courseCategories,
+  locationCategories,
   locationSchema,
   type LocationFormValues,
   type LocationSchemaType,
@@ -212,7 +212,7 @@ export function EditDestinationForm({
               {...register("category")}
             >
               <option value="">Select a category</option>
-              {courseCategories.map((category) => (
+              {locationCategories.map((category) => (
                 <option key={category} value={category}>
                   {category}
                 </option>

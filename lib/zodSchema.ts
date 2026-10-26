@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const courseCategories = [
+export const locationCategories = [
   "Historical",
   "Natural",
   "Cultural",
@@ -25,7 +25,7 @@ export const locationSchema = z.object({
       message: "Slug can only contain lowercase letters, numbers and hyphens",
     }),
 
-  category: z.enum(courseCategories, {
+  category: z.enum(locationCategories, {
     message: "Category is required",
   }),
 
