@@ -26,7 +26,7 @@ export async function SectionCards() {
           <div className="">
             <CardDescription>Total Users</CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              100
+              {totalSignups}
             </CardTitle>
           </div>
           {/* <IconUsers className="size-6 text-muted-foreground" /> */}
@@ -43,7 +43,7 @@ export async function SectionCards() {
           <div className="">
             <CardDescription>Total Customers</CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              45
+              {totalCustomers}
             </CardTitle>
           </div>
           <UserStarIcon className="size-6 text-muted-foreground" />
@@ -57,7 +57,7 @@ export async function SectionCards() {
           <div className="">
             <CardDescription>Total Destinations</CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              200
+              {totalDestinations}
             </CardTitle>
           </div>
           {/* <IconShoppingCart className="size-6 text-muted-foreground" /> */}
@@ -73,7 +73,7 @@ export async function SectionCards() {
           <div className="">
             <CardDescription>Total Revenue</CardDescription>
             <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-              1500 Br
+              {totalRevenue.toString()} Br
             </CardTitle>
           </div>
           <DollarSign className="size-6 text-muted-foreground" />
