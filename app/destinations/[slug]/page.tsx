@@ -9,6 +9,9 @@ import {
 
 import { userGetDestination } from "@/app/data/user/user-get-destination";
 import { DestinationGallery } from "./DestinationGallery";
+import { checkIfLocationBooked } from "@/app/data/user/user-is-booked";
+import { Button } from "@/components/ui/button";
+import { BookingButton } from "./_components/BookingButton";
 
 type Params = Promise<{ slug: string }>;
 
@@ -24,6 +27,8 @@ export default async function DestinationDetailPage({
     undefined,
     { year: "numeric", month: "long", day: "numeric" },
   );
+
+  const isBooked = await checkIfLocationBooked(destination.id);
 
   return (
     <div className="mx-auto w-full max-w-[1440px] px-6 py-14 sm:px-10 sm:py-16 lg:px-12">
@@ -109,12 +114,24 @@ export default async function DestinationDetailPage({
           </div>
 
           {/* TODO: wire this up once booking is built */}
-          <button
+          {/* <button
             type="button"
             className="mt-6 w-full rounded-full bg-brand py-3 text-sm font-semibold text-brand-foreground transition hover:opacity-90"
           >
             Book this trip
-          </button>
+          </button> */}
+          {isBooked ? (
+            <Button
+              // className={buttonVariants({ className: "w-full" })}
+              className="mt-6 w-full cursor-not-allowed rounded-full bg-brand/40 py-5 text-sm font-semibold text-brand-foreground/70"
+              disabled
+              // href={`/dashboard/${c.slug}`}
+            >
+              Booked!
+            </Button>
+          ) : (
+            <BookingButton locationId={destination.id} />
+          )}
           <p className="mt-2 text-center text-[11px] text-muted-foreground">
             Booking isn&apos;t connected yet — this button is a placeholder.
           </p>
