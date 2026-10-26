@@ -88,15 +88,15 @@ export default function HomeClient({ user }: HomeClientProps) {
             Discover the beauty waiting around every corner.
           </p>
 
-          <a
-            href="#destinations"
+          <Link
+            href="/destinations"
             className="mt-8 inline-flex items-center gap-4 rounded-full bg-brand py-2 pl-6 pr-2 text-sm font-semibold text-brand-foreground transition hover:bg-white"
           >
             Start Exploring
             <span className="flex size-10 items-center justify-center rounded-full bg-white">
               <ArrowUpRight size={20} />
             </span>
-          </a>
+          </Link>
 
           {/* Bottom left */}
           <div className="absolute bottom-8 left-6 text-left sm:bottom-10 sm:left-10 lg:left-12">
