@@ -8,7 +8,9 @@ import { useSignOut } from "@/hooks/user-signout";
 import { useTheme } from "next-themes";
 import { ArrowLeft, LogIn, LogOut, Menu, UserRound, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+
+const emptySubscribe = () => () => {};
 
 type DestinationsNavbarProps = {
   user: {
@@ -22,10 +24,8 @@ export default function DestinationsNavbar({ user }: DestinationsNavbarProps) {
   const { theme, setTheme } = useTheme();
   const signOut = useSignOut();
   const { startTransition } = useThemeTransition();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   const toggleTheme = () => {
     startTransition(() => {

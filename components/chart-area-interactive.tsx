@@ -16,7 +16,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export const description = "An interactive area chart";
 
@@ -32,15 +31,6 @@ interface ChartAreaInteractiveProps {
 }
 
 export function ChartAreaInteractive({ data }: ChartAreaInteractiveProps) {
-  const isMobile = useIsMobile();
-  const [timeRange, setTimeRange] = React.useState("90d");
-
-  React.useEffect(() => {
-    if (isMobile) {
-      setTimeRange("7d");
-    }
-  }, [isMobile]);
-
   const totalEnrollmentsNum = React.useMemo(
     () => data.reduce((acc, curr) => acc + curr.bookings, 0),
     [data],

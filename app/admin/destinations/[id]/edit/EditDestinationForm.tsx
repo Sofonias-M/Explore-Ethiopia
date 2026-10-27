@@ -54,8 +54,8 @@ function toCoordinates(value: unknown): { lat: number; lng: number }[] {
       (p): p is { lat: number; lng: number } =>
         typeof p === "object" &&
         p !== null &&
-        typeof (p as any).lat === "number" &&
-        typeof (p as any).lng === "number",
+        typeof (p as Record<string, unknown>).lat === "number" &&
+        typeof (p as Record<string, unknown>).lng === "number",
     )
     .map((p) => ({ lat: p.lat, lng: p.lng }));
 }

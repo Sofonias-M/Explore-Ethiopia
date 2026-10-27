@@ -5,7 +5,9 @@ import { useSignOut } from "@/hooks/user-signout";
 import { useTheme } from "next-themes";
 import { LayoutDashboard, LogIn, LogOut, Menu, UserRound } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+
+const emptySubscribe = () => () => {};
 
 type NavbarProps = {
   user: {
@@ -19,10 +21,8 @@ export default function Navbar({ user }: NavbarProps) {
   const { theme, setTheme } = useTheme();
   const signOut = useSignOut();
 
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");

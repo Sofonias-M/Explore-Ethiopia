@@ -18,7 +18,8 @@ export interface ThemeToggleButtonProps {
 export const useThemeTransition = () => {
   const startTransition = useCallback((updateFn: () => void) => {
     if ("startViewTransition" in document) {
-      (document as any).startViewTransition(updateFn);
+      // (document as any).startViewTransition(updateFn);
+      document.startViewTransition(updateFn);
     } else {
       updateFn();
     }
@@ -140,7 +141,7 @@ export const ThemeToggleButton = ({
       className={cn(
         "relative overflow-hidden transition-all",
         showLabel && "gap-2",
-        className
+        className,
       )}
     >
       {theme === "light" ? (

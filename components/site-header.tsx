@@ -7,14 +7,14 @@ import {
   useThemeTransition,
 } from "@/components/ui/shadcn-io/theme-toggle-button";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+const emptySubscribe = () => () => {};
 
 export function SiteHeader() {
   const { theme, setTheme } = useTheme();
   const { startTransition } = useThemeTransition();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   const toggleTheme = () => {
     startTransition(() => {

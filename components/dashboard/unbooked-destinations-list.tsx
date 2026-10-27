@@ -39,10 +39,10 @@ export function UnbookedDestinationsList({
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
             <Compass className="size-6 text-muted-foreground" />
-            Destinations You Haven't Booked Yet
+            Destinations You Haven&apos;t Booked Yet
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
-            Places across Ethiopia you haven't reserved yet.
+            Places across Ethiopia you haven&apos;t reserved yet.
           </p>
         </div>
 

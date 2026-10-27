@@ -16,6 +16,7 @@ import {
 import localFont from "next/font/local";
 import Navbar from "./navbar";
 import { PublicDestinationCard } from "./public/PublicDestinationCard";
+import type { UserDestinationsData } from "@/app/data/user/user-get-destinations";
 
 const myCustomFont = localFont({
   src: "../public/fonts/modernline bold.otf",
@@ -27,7 +28,7 @@ type HomeClientProps = {
     email: string;
     image?: string | null;
   } | null;
-  destinations: any;
+  destinations: UserDestinationsData;
 };
 
 // const destinations = [
@@ -252,7 +253,7 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {destinations.map((destination: any) => (
+            {destinations.map((destination) => (
               <PublicDestinationCard
                 key={destination.id}
                 destination={destination}
