@@ -32,7 +32,7 @@ export function PublicDestinationCard({
         src={url}
         alt={destination.title}
         loading="lazy"
-        className="absolute inset-0 size-full object-contain transition duration-700 group-hover:scale-105"
+        className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105"
       />
 
       {/* Same two-sided gradient as the admin card, so the badge stays readable
