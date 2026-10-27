@@ -64,12 +64,6 @@ export default function UserCalendarPage() {
       {/* Header section with right action links */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-5">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="flex size-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Schedule & Itineraries
-            </span>
-          </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground mt-1">
             Tour Booking Calendar
           </h1>
@@ -77,33 +71,6 @@ export default function UserCalendarPage() {
             Browse all your booked dates, tour departure days, and duration
             across Ethiopia.
           </p>
-        </div>
-
-        {/* Right side actions */}
-        <div className="flex items-center gap-2.5">
-          <Link
-            href="/dashboard"
-            className={buttonVariants({
-              variant: "outline",
-              size: "sm",
-              className: "rounded-xl h-9 text-xs gap-1.5",
-            })}
-          >
-            <CalendarCheck2 className="size-4 text-primary" />
-            <span>Bookings List</span>
-          </Link>
-
-          <Link
-            href="/destinations"
-            className={buttonVariants({
-              size: "sm",
-              className:
-                "rounded-xl h-9 text-xs gap-1.5 bg-primary text-primary-foreground hover:bg-primary/90",
-            })}
-          >
-            <Compass className="size-4" />
-            <span>Explore More Tours</span>
-          </Link>
         </div>
       </div>
 

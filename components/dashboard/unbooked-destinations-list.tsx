@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 
-
 export function UnbookedDestinationsList({
   destinations,
 }: {
@@ -20,13 +19,7 @@ export function UnbookedDestinationsList({
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const categories = [
-    "All",
-    "Cultural",
-    "Historical",
-    "Natural",
-    "Adventure",
-  ];
+  const categories = ["All", "Cultural", "Historical", "Natural", "Adventure"];
 
   const filtered = destinations.filter((dest) => {
     const matchesCategory =
@@ -38,13 +31,16 @@ export function UnbookedDestinationsList({
   });
 
   return (
-    <div id="unbooked-destinations" className="flex flex-col gap-6 scroll-mt-20">
+    <div
+      id="unbooked-destinations"
+      className="flex flex-col gap-6 scroll-mt-20"
+    >
       {/* Header */}
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
-            <Compass className="size-6 text-muted-foreground" />
-            Destinations You Haven&apos;t Booked Yet
+            {/* <Compass className="size-6 text-muted-foreground" /> */}
+            Explore Destinations
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
             Places across Ethiopia you haven&apos;t reserved yet.
@@ -53,7 +49,10 @@ export function UnbookedDestinationsList({
 
         {/* Counter Badge */}
         <div className="rounded-xl bg-card border border-border px-3.5 py-2 text-xs font-medium text-muted-foreground shadow-xs w-fit">
-          <span className="font-bold text-foreground">{destinations.length}</span> destinations available
+          <span className="font-bold text-foreground">
+            {destinations.length}
+          </span>{" "}
+          destinations available
         </div>
       </div>
 
@@ -158,4 +157,3 @@ export function UnbookedDestinationsListSkeleton() {
     </div>
   );
 }
-
