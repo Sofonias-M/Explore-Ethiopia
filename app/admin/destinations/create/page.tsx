@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Skeleton } from "@/components/ui/skeleton";
+
 import { tryCatch } from "@/hooks/try-catch";
 import {
   locationCategories,
@@ -429,16 +431,52 @@ function LocationCreationForm() {
   );
 }
 
+function DestinationFormSkeleton() {
+  return (
+    <div className="mx-auto max-w-2xl py-8 space-y-6">
+      <div className="space-y-2">
+        <Skeleton className="h-8 w-64" />
+        <Skeleton className="h-4 w-96 max-w-full" />
+      </div>
+
+      <div className="space-y-5 rounded-2xl border p-6 bg-card">
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-28" />
+          <Skeleton className="h-10 w-full rounded-md" />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-10 w-full rounded-md" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-10 w-full rounded-md" />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-32" />
+          <Skeleton className="h-28 w-full rounded-md" />
+        </div>
+
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-36" />
+          <Skeleton className="h-36 w-full rounded-xl" />
+        </div>
+
+        <Skeleton className="h-11 w-full rounded-md" />
+      </div>
+    </div>
+  );
+}
+
 export default function LocationCreationPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-64 items-center justify-center text-sm text-muted-foreground">
-          Loading...
-        </div>
-      }
-    >
+    <Suspense fallback={<DestinationFormSkeleton />}>
       <LocationCreationForm />
     </Suspense>
   );
 }
+

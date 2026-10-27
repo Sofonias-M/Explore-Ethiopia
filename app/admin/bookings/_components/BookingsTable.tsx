@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -344,3 +345,61 @@ export function BookingsTable({ data }: { data: AdminBookingsData }) {
     </div>
   );
 }
+
+export function BookingsTableSkeleton() {
+  return (
+    <div className="space-y-4">
+      {/* Controls Skeleton */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <Skeleton className="h-9 w-full sm:max-w-xs rounded-md" />
+        <Skeleton className="h-9 w-40 rounded-md" />
+      </div>
+
+      {/* Table Skeleton */}
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead><Skeleton className="h-4 w-28" /></TableHead>
+              <TableHead><Skeleton className="h-4 w-32" /></TableHead>
+              <TableHead><Skeleton className="h-4 w-24" /></TableHead>
+              <TableHead><Skeleton className="h-4 w-20" /></TableHead>
+              <TableHead><Skeleton className="h-4 w-24" /></TableHead>
+              <TableHead><Skeleton className="h-4 w-24" /></TableHead>
+              <TableHead className="text-right"><Skeleton className="h-4 w-16 ml-auto" /></TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <TableRow key={i}>
+                <TableCell>
+                  <div className="flex items-center gap-3">
+                    <Skeleton className="size-9 rounded-full shrink-0" />
+                    <div className="space-y-1.5">
+                      <Skeleton className="h-4 w-28" />
+                      <Skeleton className="h-3 w-36" />
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="space-y-1.5">
+                    <Skeleton className="h-4 w-32" />
+                    <Skeleton className="h-3 w-20" />
+                  </div>
+                </TableCell>
+                <TableCell><Skeleton className="h-4 w-24" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-20" /></TableCell>
+                <TableCell><Skeleton className="h-8 w-28 rounded-md" /></TableCell>
+                <TableCell><Skeleton className="h-4 w-24" /></TableCell>
+                <TableCell className="text-right">
+                  <Skeleton className="size-8 rounded-md ml-auto" />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
+  );
+}
+

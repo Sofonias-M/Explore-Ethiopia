@@ -50,6 +50,7 @@ export interface UnbookedDestinationItem {
 export interface UserDashboardData {
   bookings: UserBookingItem[];
   unbookedDestinations: UnbookedDestinationItem[];
+  onlyBookedDestinations: UserBookingItem[];
   stats: {
     totalBookings: number;
     verifiedBookings: number;
@@ -106,6 +107,32 @@ export async function userGetDashboardData(
     },
   }));
 
+  const onlyBookedDestinations: UserBookingItem[] = userBookings
+    .filter((loc) => loc.status == "Active")
+    .map((b) => ({
+      id: b.id,
+      status: b.status,
+      isVerified: b.status === "Active",
+      amount: Number(b.amount),
+      currency: b.currency,
+      createdAt: b.createdAt,
+      updatedAt: b.updatedAt,
+      location: {
+        id: b.location.id,
+        title: b.location.title,
+        slug: b.location.slug,
+        description: b.location.description,
+        place: b.location.place,
+        category: b.location.category,
+        imageUrls: b.location.imageUrls,
+        startDate: b.location.startDate,
+        durationDays: b.location.durationDays,
+        price: Number(b.location.price),
+        currency: b.location.currency,
+        isPublished: b.location.isPublished,
+      },
+    }));
+
   const unbookedDestinations: UnbookedDestinationItem[] = allLocations
     .filter((loc) => !bookedLocationIds.has(loc.id))
     .map((loc) => ({
@@ -131,6 +158,7 @@ export async function userGetDashboardData(
   return {
     bookings,
     unbookedDestinations,
+    onlyBookedDestinations,
     stats: {
       totalBookings: bookings.length,
       verifiedBookings,

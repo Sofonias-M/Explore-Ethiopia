@@ -24,7 +24,11 @@ export default function DestinationsNavbar({ user }: DestinationsNavbarProps) {
   const { theme, setTheme } = useTheme();
   const signOut = useSignOut();
   const { startTransition } = useThemeTransition();
-  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleTheme = () => {
@@ -58,6 +62,10 @@ export default function DestinationsNavbar({ user }: DestinationsNavbarProps) {
             <span className="text-base font-semibold tracking-tight">
               Explore <span className="text-brand">Ethiopia</span>
             </span>
+          </Link>
+
+          <Link href="/dashboard" className="flex items-center gap-2">
+            <span className="text-sm ml-4">Dashboard</span>
           </Link>
         </div>
 

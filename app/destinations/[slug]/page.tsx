@@ -13,6 +13,8 @@ import { DestinationGallery } from "./DestinationGallery";
 import { checkIfLocationBooked } from "@/app/data/user/user-is-booked";
 import { Button } from "@/components/ui/button";
 import { BookingButton } from "./_components/BookingButton";
+import { Skeleton } from "@/components/ui/skeleton";
+
 
 type Params = Promise<{ slug: string }>;
 
@@ -138,20 +140,75 @@ async function DestinationDetailContent({ params }: { params: Params }) {
   );
 }
 
+function DestinationDetailSkeleton() {
+  return (
+    <div className="mx-auto w-full max-w-[1440px] px-6 py-14 sm:px-10 sm:py-16 lg:px-12 space-y-6">
+      {/* Back button skeleton */}
+      <Skeleton className="h-5 w-36" />
+
+      {/* Gallery Skeleton */}
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Skeleton className="h-[340px] sm:h-[420px] sm:col-span-2 rounded-2xl" />
+        <div className="hidden sm:grid grid-rows-2 gap-3">
+          <Skeleton className="h-full rounded-2xl" />
+          <Skeleton className="h-full rounded-2xl" />
+        </div>
+      </div>
+
+      <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px]">
+        {/* Left Column */}
+        <div className="space-y-6">
+          <Skeleton className="h-6 w-24 rounded-full" />
+          <Skeleton className="h-10 w-3/4" />
+          <Skeleton className="h-4 w-40" />
+          <div className="space-y-3 pt-4">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-5/6" />
+            <Skeleton className="h-4 w-4/6" />
+          </div>
+
+          <div className="flex items-center gap-3 rounded-2xl border p-4">
+            <Skeleton className="size-10 rounded-full" />
+            <div className="space-y-1.5 flex-1">
+              <Skeleton className="h-3 w-20" />
+              <Skeleton className="h-4 w-32" />
+            </div>
+          </div>
+        </div>
+
+        {/* Right Aside Card */}
+        <div className="h-fit rounded-2xl border bg-card p-6 space-y-6">
+          <div className="space-y-1.5">
+            <Skeleton className="h-8 w-32" />
+            <Skeleton className="h-3 w-16" />
+          </div>
+          <div className="space-y-3 border-t pt-6">
+            <div className="flex justify-between">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-4 w-28" />
+            </div>
+            <div className="flex justify-between">
+              <Skeleton className="h-4 w-20" />
+              <Skeleton className="h-4 w-16" />
+            </div>
+          </div>
+          <Skeleton className="h-11 w-full rounded-full" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function DestinationDetailPage({
   params,
 }: {
   params: Params;
 }) {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center text-sm text-muted-foreground">
-          Loading destination...
-        </div>
-      }
-    >
+    <Suspense fallback={<DestinationDetailSkeleton />}>
       <DestinationDetailContent params={params} />
     </Suspense>
   );
 }
+

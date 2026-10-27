@@ -1,7 +1,11 @@
 import { Suspense } from "react";
 import { Mountain } from "lucide-react";
 import { userGetDestinations } from "@/app/data/user/user-get-destinations";
-import { PublicDestinationCard } from "@/components/public/PublicDestinationCard";
+import {
+  PublicDestinationCard,
+  PublicDestinationCardSkeleton,
+} from "@/components/public/PublicDestinationCard";
+import { Skeleton } from "@/components/ui/skeleton";
 
 async function DestinationsContent() {
   const destinations = await userGetDestinations();
@@ -36,16 +40,28 @@ async function DestinationsContent() {
   );
 }
 
+function PublicDestinationsPageSkeleton() {
+  return (
+    <div className="mx-auto w-full max-w-[1440px] px-6 py-14 sm:px-10 sm:py-16 lg:px-12">
+      <div className="mb-10 space-y-4">
+        <Skeleton className="h-4 w-36" />
+        <Skeleton className="h-12 w-96 max-w-full" />
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <PublicDestinationCardSkeleton key={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function DestinationsPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center text-sm text-muted-foreground">
-          Loading destinations...
-        </div>
-      }
-    >
+    <Suspense fallback={<PublicDestinationsPageSkeleton />}>
       <DestinationsContent />
     </Suspense>
   );
 }
+

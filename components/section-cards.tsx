@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Book,
   DollarSign,
@@ -87,3 +88,25 @@ export async function SectionCards() {
     </div>
   );
 }
+
+export function SectionCardsSkeleton() {
+  return (
+    <div className="grid grid-cols-1 gap-4 px-4 lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <Card key={i} className="@container/card">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-8 w-16" />
+            </div>
+            <Skeleton className="size-6 rounded-md" />
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <Skeleton className="h-3 w-40" />
+          </CardFooter>
+        </Card>
+      ))}
+    </div>
+  );
+}
+

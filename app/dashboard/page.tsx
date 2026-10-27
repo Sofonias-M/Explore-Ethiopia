@@ -3,10 +3,20 @@ import Link from "next/link";
 import { CalendarDays, Compass } from "lucide-react";
 import { requireUser } from "@/app/data/user/require-user";
 import { userGetDashboardData } from "@/app/data/user/user-get-dashboard-data";
-import { DashboardStats } from "@/components/dashboard/dashboard-stats";
-import { BookingsDataTable } from "@/components/dashboard/bookings-data-table";
-import { UnbookedDestinationsList } from "@/components/dashboard/unbooked-destinations-list";
+import {
+  DashboardStats,
+  DashboardStatsSkeleton,
+} from "@/components/dashboard/dashboard-stats";
+import {
+  BookingsDataTable,
+  BookingsDataTableSkeleton,
+} from "@/components/dashboard/bookings-data-table";
+import {
+  UnbookedDestinationsList,
+  UnbookedDestinationsListSkeleton,
+} from "@/components/dashboard/unbooked-destinations-list";
 import { buttonVariants } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 async function DashboardContent() {
   const user = await requireUser();
@@ -78,16 +88,44 @@ async function DashboardContent() {
   );
 }
 
+function DashboardSkeleton() {
+  return (
+    <div className="flex flex-col gap-8">
+      {/* Top Header Section Skeleton */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-6">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Skeleton className="size-2 rounded-full" />
+            <Skeleton className="h-3.5 w-24" />
+          </div>
+          <Skeleton className="h-8 w-64" />
+          <Skeleton className="h-4 w-96 max-w-full" />
+        </div>
+        <div className="flex items-center gap-2.5">
+          <Skeleton className="h-9 w-28 rounded-xl" />
+          <Skeleton className="h-9 w-36 rounded-xl" />
+        </div>
+      </div>
+
+      {/* Summary Stat Cards Skeleton */}
+      <DashboardStatsSkeleton />
+
+      {/* Bookings Data Table Skeleton */}
+      <BookingsDataTableSkeleton />
+
+      <div className="h-px w-full bg-border/60 my-2" />
+
+      {/* Unbooked Destinations Skeleton */}
+      <UnbookedDestinationsListSkeleton />
+    </div>
+  );
+}
+
 export default function UserDashboardPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-64 items-center justify-center rounded-xl border bg-card text-sm text-muted-foreground">
-          Loading dashboard...
-        </div>
-      }
-    >
+    <Suspense fallback={<DashboardSkeleton />}>
       <DashboardContent />
     </Suspense>
   );
 }
+

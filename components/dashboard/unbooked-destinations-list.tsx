@@ -3,9 +3,14 @@
 import { useState } from "react";
 import { Compass, Search } from "lucide-react";
 import { UnbookedDestinationItem } from "@/app/data/user/user-get-dashboard-data";
-import { PublicDestinationCard } from "@/components/public/PublicDestinationCard";
+import {
+  PublicDestinationCard,
+  PublicDestinationCardSkeleton,
+} from "@/components/public/PublicDestinationCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
+
 
 export function UnbookedDestinationsList({
   destinations,
@@ -118,3 +123,39 @@ export function UnbookedDestinationsList({
     </div>
   );
 }
+
+export function UnbookedDestinationsListSkeleton() {
+  return (
+    <div className="flex flex-col gap-6">
+      {/* Header Skeleton */}
+      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-2">
+            <Skeleton className="size-6 rounded" />
+            <Skeleton className="h-6 w-72" />
+          </div>
+          <Skeleton className="h-3.5 w-60" />
+        </div>
+        <Skeleton className="h-8 w-40 rounded-xl" />
+      </div>
+
+      {/* Category Pills & Search Skeleton */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-1.5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Skeleton key={i} className="h-7 w-20 rounded-full" />
+          ))}
+        </div>
+        <Skeleton className="h-9 w-64 rounded-xl" />
+      </div>
+
+      {/* Cards Grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <PublicDestinationCardSkeleton key={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
