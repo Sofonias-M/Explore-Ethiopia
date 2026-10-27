@@ -3,7 +3,7 @@
 import { ThemeToggleButton } from "@/components/ui/shadcn-io/theme-toggle-button";
 import { useSignOut } from "@/hooks/user-signout";
 import { useTheme } from "next-themes";
-import { LogIn, LogOut, Menu, UserRound } from "lucide-react";
+import { LayoutDashboard, LogIn, LogOut, Menu, UserRound } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -105,6 +105,17 @@ export default function Navbar({ user }: NavbarProps) {
 
                 <div className="my-1 h-px bg-border" />
 
+                <Link
+                  href="/dashboard"
+                  role="menuitem"
+                  className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition-colors hover:bg-muted"
+                >
+                  <LayoutDashboard size={16} />
+                  My Dashboard
+                </Link>
+
+                <div className="my-1 h-px bg-border" />
+
                 {/* Log out */}
                 <button
                   role="menuitem"
@@ -167,12 +178,22 @@ export default function Navbar({ user }: NavbarProps) {
             Contact
           </a>
           {user ? (
-            <button
-              onClick={signOut}
-              className="rounded-lg p-3 text-left text-destructive hover:bg-destructive/10"
-            >
-              Log out
-            </button>
+            <>
+              <Link
+                href="/dashboard"
+                className="rounded-lg p-3 hover:bg-accent font-medium flex items-center gap-2"
+                onClick={() => setMenuOpen(false)}
+              >
+                <LayoutDashboard size={16} />
+                My Dashboard
+              </Link>
+              <button
+                onClick={signOut}
+                className="rounded-lg p-3 text-left text-destructive hover:bg-destructive/10"
+              >
+                Log out
+              </button>
+            </>
           ) : (
             <Link
               href="/login"

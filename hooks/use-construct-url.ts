@@ -6,6 +6,10 @@
 export function useContructUrl(key: string | null | undefined): string {
   if (!key) return "";
 
+  if (key.startsWith("http://") || key.startsWith("https://")) {
+    return key;
+  }
+
   const bucket = process.env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES;
 
   if (!bucket) return "";

@@ -28,10 +28,10 @@ export default function PaymentSuccessfull() {
             </p>
 
             <Link
-              href={`/`}
+              href={`/dashboard`}
               className={buttonVariants({ className: "w-full mt-5" })}
             >
-              Go to Home
+              Go to Dashboard
             </Link>
           </div>
         </CardContent>
