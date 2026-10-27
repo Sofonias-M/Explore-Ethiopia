@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Plus, Sparkles, Trash2 } from "lucide-react";
-import { useState, useTransition } from "react";
+import { Suspense, useState, useTransition } from "react";
 import { toast } from "sonner";
 
 import { MultiImageUploader } from "@/components/file-uploader/Uploader";
@@ -44,7 +44,7 @@ function FieldError({ message }: { message?: string }) {
   return <p className="mt-1 text-xs text-destructive">{message}</p>;
 }
 
-export default function LocationCreationPage() {
+function LocationCreationForm() {
   // const [imageInput, setImageInput] = useState("");
   // const [imageError, setImageError] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -426,5 +426,19 @@ export default function LocationCreationPage() {
         </div>
       </form>
     </div>
+  );
+}
+
+export default function LocationCreationPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-64 items-center justify-center text-sm text-muted-foreground">
+          Loading...
+        </div>
+      }
+    >
+      <LocationCreationForm />
+    </Suspense>
   );
 }

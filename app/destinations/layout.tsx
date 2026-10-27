@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getSession } from "@/lib/get-session";
 import DestinationsNavbar from "@/components/destinations-navbar";
 
@@ -5,25 +6,34 @@ interface DestinationsLayoutProps {
   children: React.ReactNode;
 }
 
-export default async function DestinationsLayout({
-  children,
-}: DestinationsLayoutProps) {
+async function NavbarWithSession() {
   const session = await getSession();
 
   return (
+    <DestinationsNavbar
+      user={
+        session
+          ? {
+              name: session.user.name,
+              email: session.user.email,
+              image: session.user.image,
+            }
+          : null
+      }
+    />
+  );
+}
+
+export default function DestinationsLayout({
+  children,
+}: DestinationsLayoutProps) {
+  return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <DestinationsNavbar
-        user={
-          session
-            ? {
-                name: session.user.name,
-                email: session.user.email,
-                image: session.user.image,
-              }
-            : null
-        }
-      />
+      <Suspense fallback={<DestinationsNavbar user={null} />}>
+        <NavbarWithSession />
+      </Suspense>
       <main className="flex-1">{children}</main>
     </div>
   );
 }
+

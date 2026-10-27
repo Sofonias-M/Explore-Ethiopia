@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -15,11 +16,7 @@ import { BookingButton } from "./_components/BookingButton";
 
 type Params = Promise<{ slug: string }>;
 
-export default async function DestinationDetailPage({
-  params,
-}: {
-  params: Params;
-}) {
+async function DestinationDetailContent({ params }: { params: Params }) {
   const { slug } = await params;
   const destination = await userGetDestination(slug);
 
@@ -138,5 +135,23 @@ export default async function DestinationDetailPage({
         </aside>
       </div>
     </div>
+  );
+}
+
+export default function DestinationDetailPage({
+  params,
+}: {
+  params: Params;
+}) {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center text-sm text-muted-foreground">
+          Loading destination...
+        </div>
+      }
+    >
+      <DestinationDetailContent params={params} />
+    </Suspense>
   );
 }
