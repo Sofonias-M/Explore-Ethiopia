@@ -1,9 +1,11 @@
 import { Suspense } from "react";
 import { getSession } from "@/lib/get-session";
 import HomeClient from "@/components/home-client";
+import { userGetDestinations } from "./data/user/user-get-destinations";
 
 async function HomeContent() {
   const session = await getSession();
+  const destinations = await userGetDestinations();
 
   return (
     <HomeClient
@@ -16,6 +18,7 @@ async function HomeContent() {
             }
           : null
       }
+      destinations={destinations}
     />
   );
 }

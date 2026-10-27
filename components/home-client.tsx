@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import localFont from "next/font/local";
 import Navbar from "./navbar";
+import { PublicDestinationCard } from "./public/PublicDestinationCard";
 
 const myCustomFont = localFont({
   src: "../public/fonts/modernline bold.otf",
@@ -26,34 +27,36 @@ type HomeClientProps = {
     email: string;
     image?: string | null;
   } | null;
+  destinations: any;
 };
 
-const destinations = [
-  {
-    name: "Lalibela",
-    location: "Amhara, Ethiopia",
-    category: "History & Culture",
-    image:
-      "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    name: "Simien Mountains",
-    location: "Northern Ethiopia",
-    category: "Mountain Escape",
-    image:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85",
-  },
-  {
-    name: "Danakil Depression",
-    location: "Afar, Ethiopia",
-    category: "Natural Wonders",
-    image:
-      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1000&q=85",
-  },
-];
+// const destinations = [
+//   {
+//     name: "Lalibela",
+//     location: "Amhara, Ethiopia",
+//     category: "History & Culture",
+//     image:
+//       "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1000&q=85",
+//   },
+//   {
+//     name: "Simien Mountains",
+//     location: "Northern Ethiopia",
+//     category: "Mountain Escape",
+//     image:
+//       "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85",
+//   },
+//   {
+//     name: "Danakil Depression",
+//     location: "Afar, Ethiopia",
+//     category: "Natural Wonders",
+//     image:
+//       "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1000&q=85",
+//   },
+// ];
 
-export default function HomeClient({ user }: HomeClientProps) {
+export default function HomeClient({ user, destinations }: HomeClientProps) {
   const signOut = useSignOut();
+  // const destinations = await userGetDestinations();
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -249,41 +252,14 @@ export default function HomeClient({ user }: HomeClientProps) {
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {destinations.map((destination) => (
-              <article
-                key={destination.name}
-                className="group relative min-h-[360px] overflow-hidden rounded-2xl bg-muted"
-              >
-                <img
-                  src={destination.image}
-                  alt={destination.name}
-                  loading="lazy"
-                  className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-                <span className="absolute left-5 top-5 rounded-full border border-white/40 bg-white/20 px-3 py-2 text-[10px] text-white backdrop-blur-md">
-                  {destination.category}
-                </span>
-                <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-3 text-white">
-                  <div>
-                    <p className="mb-2 text-[10px] text-white/75">
-                      {destination.location}
-                    </p>
-                    <h3 className="text-2xl font-medium tracking-tight">
-                      {destination.name}
-                    </h3>
-                  </div>
-                  <a
-                    href="#contact"
-                    aria-label={`Explore ${destination.name}`}
-                    className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-black transition group-hover:bg-brand"
-                  >
-                    <ArrowUpRight size={19} />
-                  </a>
-                </div>
-              </article>
+            {destinations.map((destination: any) => (
+              <PublicDestinationCard
+                key={destination.id}
+                destination={destination}
+              />
             ))}
           </div>
+          {/* <DestinationList /> */}
         </section>
 
         {/* Closing section */}
