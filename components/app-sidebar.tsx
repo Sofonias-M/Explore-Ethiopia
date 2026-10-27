@@ -32,6 +32,7 @@ import {
   CommandIcon,
   ImageIcon,
   MapPin,
+  TicketIcon,
 } from "lucide-react";
 
 const data = {
@@ -55,6 +56,11 @@ const data = {
       title: "Desinations",
       url: "/admin/destinations",
       icon: <MapPin />,
+    },
+    {
+      title: "Bookings",
+      url: "/admin/bookings",
+      icon: <TicketIcon />,
     },
     // {
     //   title: "Projects",

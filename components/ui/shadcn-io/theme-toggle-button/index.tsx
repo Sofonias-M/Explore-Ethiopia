@@ -18,7 +18,6 @@ export interface ThemeToggleButtonProps {
 export const useThemeTransition = () => {
   const startTransition = useCallback((updateFn: () => void) => {
     if ("startViewTransition" in document) {
-      // (document as any).startViewTransition(updateFn);
       document.startViewTransition(updateFn);
     } else {
       updateFn();
