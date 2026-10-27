@@ -1,13 +1,11 @@
 // import { S3 } from "@/lib/S3Clinet";
+import { requireAdmin } from "@/app/data/admin/require-admin";
+import { S3 } from "@/lib/S3Client";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
-import { S3 } from "@/lib/S3Client";
-import { requireAdmin } from "@/app/data/admin/require-admin";
 
 export async function DELETE(request: Request) {
-  const session = await requireAdmin();
+  await requireAdmin();
   try {
     // const decision = await aj.protect(request, {
     //   fingerprint: session?.user.id as string,

@@ -8,7 +8,7 @@ import { locationSchema, LocationSchemaType } from "@/lib/zodSchema";
 export async function CreateDestination(
   values: LocationSchemaType,
 ): Promise<APIResponse> {
-  const session = await requireAdmin();
+  await requireAdmin();
   try {
     const validation = locationSchema.safeParse(values);
     if (!validation.success) {
@@ -18,7 +18,7 @@ export async function CreateDestination(
       };
     }
 
-    const data = await prisma.location.create({
+    await prisma.location.create({
       data: {
         ...validation.data,
         // userId: session?.user.id as string, //TODO: get user from session
@@ -29,7 +29,7 @@ export async function CreateDestination(
       status: "success",
       message: "Destionation created successfully",
     };
-  } catch (e) {
+  } catch {
     // console.log(e);
     return {
       status: "error",

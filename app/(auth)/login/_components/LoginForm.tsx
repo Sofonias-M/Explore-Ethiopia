@@ -9,18 +9,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 // import { authClient } from "@/lib/auth-client";
-import { Loader, Loader2, Send } from "lucide-react";
+import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { toast } from "sonner";
 
 export function LoginForm() {
-  const router = useRouter();
-  const [githubPending, startGithubTransition] = useTransition();
   const [googlePending, startGoogleTransition] = useTransition();
   // const [emailPending, startEmailTransition] = useTransition();
   // const [email, setEmail] = useState("");

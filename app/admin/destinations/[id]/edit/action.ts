@@ -29,7 +29,7 @@ export async function UpdateDestination(
       status: "success",
       message: "Destination updated successfully",
     };
-  } catch (e) {
+  } catch {
     return {
       status: "error",
       message: "Failed to update destination",

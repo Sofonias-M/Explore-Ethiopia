@@ -2,7 +2,6 @@
 
 import { prisma } from "@/lib/db";
 // import { env } from "@/lib/env";
-import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {

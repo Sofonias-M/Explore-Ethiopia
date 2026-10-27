@@ -78,8 +78,8 @@ export function DestinationCard({ destination }: { destination: Destination }) {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete {destination.title}?</AlertDialogTitle>
             <AlertDialogDescription>
-              This can't be undone. The destination will be removed from the
-              site.
+              This can&apos;t be undone. The destination will be removed from
+              the site.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

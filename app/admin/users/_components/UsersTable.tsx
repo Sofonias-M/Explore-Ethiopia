@@ -215,7 +215,7 @@ function UserRow({
                 <AlertDialogTitle>Delete {user.name}?</AlertDialogTitle>
                 <AlertDialogDescription>
                   This permanently removes their account, sessions and trips.
-                  This can't be undone.
+                  This can&apos;t be undone.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>

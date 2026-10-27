@@ -1,8 +1,6 @@
 "use server";
 
-import { auth } from "@/lib/auth"; // adjust to wherever your Better Auth instance lives
 import { prisma } from "@/lib/db"; // adjust to your Prisma client export
-import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "./require-admin";
 

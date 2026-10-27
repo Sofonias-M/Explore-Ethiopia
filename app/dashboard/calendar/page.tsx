@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { CalendarCheck2, Compass, Sparkles } from "lucide-react";
 import { requireUser } from "@/app/data/user/require-user";
 import { userGetDashboardData } from "@/app/data/user/user-get-dashboard-data";
 import { BookingCalendar } from "@/components/dashboard/booking-calendar";
 import { buttonVariants } from "@/components/ui/button";
+import { CalendarCheck2 } from "lucide-react";
+import Link from "next/link";
 
 export default async function UserCalendarPage() {
   const user = await requireUser();

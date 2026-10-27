@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import axios from "axios";
 // import { env } from "@/lib/env";
 import { requireUser } from "@/app/data/admin/require-user";
+
 // import { requireUser } from "@/app/data/user/require-user";
 
 export async function bookDestination(
@@ -126,26 +127,29 @@ export async function bookDestination(
     });
 
     checkoutURL = result.checkoutUrl as string;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error in booking:", error);
 
-    if (error.response) {
-      console.error("Chapa API error response:", error.response.data);
-      return {
-        status: "error",
-        message: `Payment processing failed: ${
-          error.response.data?.message || "Unknown error"
-        }`,
-      };
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        console.error("Chapa API error response:", error.response.data);
+
+        return {
+          status: "error",
+          message: `Payment processing failed: ${
+            error.response.data?.message || "Unknown error"
+          }`,
+        };
+      }
     }
 
-    if (error.message?.includes("redirect")) {
-      throw error; // Re-throw redirect errors
+    if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
+      throw error;
     }
 
     return {
       status: "error",
-      message: error.message || "Something went wrong",
+      message: error instanceof Error ? error.message : "Something went wrong",
     };
   }
 
