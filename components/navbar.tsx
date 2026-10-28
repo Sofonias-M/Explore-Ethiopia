@@ -30,12 +30,15 @@ export default function Navbar({ user }: NavbarProps) {
 
   return (
     <header className="relative z-30 mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 sm:px-8 lg:px-12 lg:py-7">
-      <a href="#home" className="flex items-center gap-2.5 text-white">
-        <span className="flex size-8 items-center justify-center rounded-full border-2 border-white/80">
-          <span className="size-4 rounded-full bg-brand" />
+      <a href="#home" className="group flex items-center gap-2.5 text-white">
+        <span className="flex size-9 items-center justify-center rounded-full border-2 border-white/80 transition-transform duration-300 group-hover:rotate-12">
+          <span className="size-4 rounded-full bg-[#E3C58A] transition-transform duration-300 group-hover:scale-110" />
         </span>
         <span className="text-lg font-semibold tracking-tight">
-          Explore <span className="text-brand">Ethiopia</span>
+          Explore{" "}
+          <span className="text-[#E3C58A] transition-colors duration-300">
+            Ethiopia
+          </span>
         </span>
       </a>
 
@@ -131,7 +134,7 @@ export default function Navbar({ user }: NavbarProps) {
         ) : (
           <Link
             href="/login"
-            className="hidden items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-brand-foreground transition hover:bg-white sm:inline-flex"
+            className="hidden items-center gap-2 rounded-full border border-[#E3C58A]/50 bg-[#244B3C] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-black/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#315B49] hover:shadow-xl sm:inline-flex"
           >
             <LogIn size={16} />
             Log in
@@ -141,7 +144,7 @@ export default function Navbar({ user }: NavbarProps) {
         <button
           aria-label="Toggle navigation"
           onClick={() => setMenuOpen(!menuOpen)}
-          className="rounded-full border border-white/30 bg-black/20 p-3 text-white md:hidden"
+          className="rounded-full border border-white/30 bg-black/20 p-3 text-white shadow-sm backdrop-blur-md transition-all duration-200 hover:border-[#E3C58A]/70 hover:bg-black/40 active:scale-95 md:hidden"
         >
           <Menu size={18} />
         </button>

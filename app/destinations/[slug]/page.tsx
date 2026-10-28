@@ -33,7 +33,7 @@ async function DestinationDetailContent({ params }: { params: Params }) {
     <div className="mx-auto w-full max-w-[1440px] px-6 py-14 sm:px-10 sm:py-16 lg:px-12">
       <Link
         href="/destinations"
-        className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition hover:text-foreground"
+        className="mb-8 inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-4 py-2.5 text-sm text-muted-foreground transition-all duration-200 hover:border-[#C69A45]/50 hover:text-[#244B3C]"
       >
         <ArrowLeft size={14} />
         Back to destinations
@@ -44,13 +44,13 @@ async function DestinationDetailContent({ params }: { params: Params }) {
         imageUrls={destination.imageUrls}
       />
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px]">
+      <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_380px]">
         <div>
-          <span className="inline-flex rounded-full bg-muted px-3 py-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+          <span className="inline-flex rounded-full border border-[#C69A45]/30 bg-[#F0EBE1] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#244B3C]">
             {destination.category}
           </span>
 
-          <h1 className="mt-4 text-3xl font-medium tracking-tight sm:text-4xl">
+          <h1 className="mt-5 text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
             {destination.title}
           </h1>
 
@@ -59,12 +59,12 @@ async function DestinationDetailContent({ params }: { params: Params }) {
             {destination.place}
           </p>
 
-          <p className="mt-6 whitespace-pre-line text-sm leading-7 text-muted-foreground">
+          <p className="mt-7 whitespace-pre-line text-base leading-8 text-muted-foreground">
             {destination.description}
           </p>
 
           {destination.tourGuide && (
-            <div className="mt-8 flex items-center gap-3 rounded-2xl border p-4">
+            <div className="mt-9 flex items-center gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-sm">
               {destination.tourGuide.image ? (
                 <img
                   src={destination.tourGuide.image}
@@ -86,8 +86,8 @@ async function DestinationDetailContent({ params }: { params: Params }) {
           )}
         </div>
 
-        <aside className="h-fit rounded-2xl border bg-card p-6 lg:sticky lg:top-24">
-          <p className="text-3xl font-semibold tracking-tight">
+        <aside className="h-fit rounded-3xl border border-border/70 bg-card p-7 shadow-lg shadow-black/5 lg:sticky lg:top-24">
+          <p className="text-3xl font-bold tracking-tight text-[#244B3C]">
             {destination.currency} {destination.price.toLocaleString()}
           </p>
           <p className="text-xs text-muted-foreground">per person</p>
@@ -122,7 +122,7 @@ async function DestinationDetailContent({ params }: { params: Params }) {
           {isBooked ? (
             <Button
               // className={buttonVariants({ className: "w-full" })}
-              className="mt-6 w-full cursor-not-allowed rounded-full bg-brand/40 py-5 text-sm font-semibold text-brand-foreground/70"
+              className="mt-6 w-full cursor-not-allowed rounded-full bg-[#244B3C]/40 py-5 text-sm font-semibold text-white/80"
               disabled
               // href={`/dashboard/${c.slug}`}
             >

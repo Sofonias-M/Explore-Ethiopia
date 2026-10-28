@@ -12,14 +12,22 @@ async function DestinationsContent() {
 
   return (
     <div className="mx-auto w-full max-w-[1440px] px-6 py-14 sm:px-10 sm:py-16 lg:px-12">
-      <div className="mb-10">
-        <p className="mb-4 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-          <Mountain size={14} className="text-brand-accent" />
+      <div className="mb-12">
+        <p className="mb-5 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+          <Mountain size={15} className="text-[#C69A45]" />
           Made for the curious
         </p>
-        <h1 className="max-w-xl text-3xl font-medium leading-tight tracking-[-0.05em] sm:text-5xl">
-          Explore all destinations.
+        <h1 className="max-w-2xl text-4xl font-semibold leading-[1.1] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
+          Explore all{" "}
+          <span className="font-medium italic text-[#244B3C]">
+            destinations.
+          </span>
         </h1>
+        <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
+          From dramatic highlands to ancient wonders, discover the places that make
+          Ethiopia unforgettable.
+        </p>
+        <div className="mt-7 h-1 w-16 rounded-full bg-[#C69A45]" />
       </div>
 
       {destinations.length === 0 ? (

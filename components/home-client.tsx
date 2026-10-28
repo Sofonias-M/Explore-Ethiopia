@@ -67,23 +67,24 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
         className="relative isolate min-h-[680px] overflow-hidden sm:min-h-[740px] lg:min-h-[800px]"
       >
         <img
-          // src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=90"
-          src="../hero4.jpg"
-          alt="Mountain landscape"
+          src="/hero4.jpg"
+          alt="Ethiopian highlands illuminated by warm golden-hour sunlight"
+          fetchPriority="high"
           className="absolute inset-0 -z-20 size-full object-cover object-center"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/35 via-black/10 to-black/65" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#211C14]/75 via-[#211C14]/30 to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#211C14]/50 via-transparent to-[#211C14]/10" />
 
         {/* Navigation */}
         <Navbar user={user} />
 
         {/* Hero content */}
         <div className="relative mx-auto flex min-h-[570px] max-w-[1200px] flex-col items-center justify-center px-5 pb-20 pt-12 text-center text-white sm:min-h-[620px] lg:min-h-[650px]">
-          <p className="mb-[-8px] -rotate-6 font-serif text-6xl italic leading-none text-brand sm:mb-[-18px] sm:text-8xl lg:text-[118px]">
+          <p className="mb-[-8px] -rotate-6 font-serif text-6xl italic leading-none text-[#E3C58A] sm:mb-[-18px] sm:text-8xl lg:text-[118px]">
             <span className={myCustomFont.className}>Explore</span>
           </p>
 
-          <h1 className="text-[clamp(3.8rem,12vw,10rem)] font-black uppercase leading-[0.95] tracking-[-0.07em]">
+          <h1 className="text-[clamp(3.8rem,12vw,10rem)] font-black uppercase leading-[0.95] tracking-[-0.07em] drop-shadow-lg">
             Ethiopia
           </h1>
 
@@ -94,7 +95,7 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
 
           <Link
             href="/destinations"
-            className="mt-8 inline-flex items-center gap-4 rounded-full bg-brand py-2 pl-6 pr-2 text-sm font-semibold text-brand-foreground transition hover:bg-white"
+            className="mt-8 inline-flex items-center gap-4 rounded-full bg-[#244B3C] py-2 pl-6 pr-2 text-sm font-semibold text-white shadow-lg transition duration-300 hover:bg-[#315F4C] hover:shadow-xl"
           >
             Start Exploring
             <span className="flex size-10 items-center justify-center rounded-full bg-white">
@@ -141,16 +142,16 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
         {/* Overview */}
         <section
           id="about"
-          className="mx-auto grid max-w-[1440px] gap-9 px-6 py-16 sm:px-10 sm:py-20 lg:grid-cols-[1fr_1fr_0.95fr] lg:gap-10 lg:px-12 lg:py-24"
+          className="mx-auto grid max-w-[1440px] gap-8 px-5 py-16 sm:gap-10 sm:px-10 sm:py-20 lg:grid-cols-[1fr_1fr_0.95fr] lg:gap-12 lg:px-12 lg:py-28"
         >
           <div className="flex flex-col items-start">
             <p className="mb-5 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
               <Star size={13} className="fill-brand-accent text-brand-accent" />
               The experience
             </p>
-            <h2 className="max-w-md text-3xl font-medium leading-[1.2] tracking-[-0.05em] sm:text-4xl">
+            <h2 className="max-w-md text-3xl font-semibold leading-[1.15] tracking-[-0.045em] sm:text-4xl lg:text-[2.75rem]">
               Find your own path through{" "}
-              <span className="text-muted-foreground">Ethiopia.</span>
+              <span className="font-normal italic text-brand">Ethiopia.</span>
             </h2>
             <p className="mt-5 max-w-sm text-sm leading-7 text-muted-foreground">
               From ancient rock-hewn churches to dramatic mountain trails,
@@ -168,15 +169,15 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
             </a>
           </div>
 
-          <div className="group relative min-h-[340px] overflow-hidden rounded-2xl bg-muted">
+          <div className="group relative min-h-[360px] overflow-hidden rounded-3xl bg-muted shadow-sm sm:min-h-[420px]">
             <img
               src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1000&q=85"
               alt="African landscape"
               loading="lazy"
-              className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105"
+              className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-            <span className="absolute left-5 top-5 rounded-full bg-white/30 px-3 py-2 text-[10px] text-white backdrop-blur-md">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#211C14]/85 via-[#211C14]/15 to-transparent" />
+            <span className="absolute left-5 top-5 rounded-full border border-white/30 bg-[#211C14]/35 px-4 py-2 text-[10px] font-medium tracking-wide text-white backdrop-blur-md">
               A world of discovery
             </span>
             <div className="absolute inset-x-5 bottom-5 text-white">
@@ -204,8 +205,8 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
               </div>
             ))}
 
-            <div className="mt-5 flex-1 rounded-2xl bg-muted p-6">
-              <div className="mb-5 flex size-10 items-center justify-center rounded-full bg-brand/30">
+            <div className="mt-5 flex-1 rounded-3xl border border-border/70 bg-card p-6 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-7">
+              <div className="mb-5 flex size-11 items-center justify-center rounded-full bg-[#EDE7D9] text-[#244B3C]">
                 <Compass size={20} />
               </div>
               <h3 className="text-xl font-medium leading-7 tracking-tight">
@@ -229,7 +230,7 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
         {/* Destinations */}
         <section
           id="destinations"
-          className="mx-auto max-w-[1440px] px-6 pb-20 sm:px-10 lg:px-12 lg:pb-28"
+          className="mx-auto max-w-[1440px] scroll-mt-24 px-5 pb-20 sm:px-10 sm:pb-24 lg:px-12 lg:pb-32"
         >
           <div className="mb-9 flex items-end justify-between gap-5">
             <div>
@@ -237,8 +238,9 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
                 <Mountain size={14} className="text-brand-accent" />
                 Made for the curious
               </p>
-              <h2 className="max-w-xl text-3xl font-medium leading-tight tracking-[-0.05em] sm:text-5xl">
-                Destinations that stay with you.
+              <h2 className="max-w-xl text-3xl font-semibold leading-[1.1] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
+                Destinations that{" "}
+                <span className="font-normal italic text-brand">stay with you.</span>
               </h2>
             </div>
             <a
@@ -303,7 +305,7 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
               <a
                 key={item}
                 href="#destinations"
-                className="flex items-center justify-between gap-4 border-b border-border py-5 text-sm transition hover:pl-2"
+                className="group flex items-center justify-between gap-4 border-b border-border/80 py-5 text-sm transition-all duration-300 hover:pl-2 hover:text-brand"
               >
                 <span className="flex items-center gap-4">
                   <span className="text-xs text-muted-foreground">
@@ -311,12 +313,12 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
                   </span>
                   {item}
                 </span>
-                <ArrowUpRight size={17} className="shrink-0" />
+                <ArrowUpRight size={17} className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </a>
             ))}
 
             {user ? (
-              <div className="mt-7 flex items-center justify-between gap-4">
+              <div className="mt-7 flex items-center justify-between gap-4 rounded-2xl border border-border/70 bg-card p-4">
                 <div className="flex min-w-0 items-center gap-3">
                   {user.image ? (
                     <img
@@ -326,7 +328,7 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
                       className="size-10 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="flex size-10 items-center justify-center rounded-full bg-muted">
+                    <div className="flex size-10 items-center justify-center rounded-full bg-[#EDE7D9] text-[#244B3C]">
                       <UserRound size={18} />
                     </div>
                   )}
@@ -354,7 +356,7 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
                 <p className="text-xs text-muted-foreground">
                   Log in to start planning your trips.
                 </p>
-                <Button size="sm" className="shrink-0 rounded-full">
+                <Button size="sm" className="shrink-0 rounded-full bg-[#244B3C] px-5 text-white shadow-sm transition-all duration-300 hover:bg-[#315F4C] hover:shadow-md">
                   <Link href="/login">
                     <LogIn size={14} />
                     Log in
@@ -366,17 +368,24 @@ export default function HomeClient({ user, destinations }: HomeClientProps) {
         </section>
       </div>
 
-      <footer className="border-t border-border bg-background">
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-4 px-6 py-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-12">
+      <footer className="border-t border-[#E5DED0] bg-[#F0EBE1]">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-4 px-5 py-9 text-xs text-[#706F63] sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-12">
           <a
             href="#home"
-            className="text-sm font-semibold tracking-tight text-foreground"
+            className="text-sm font-bold tracking-tight text-[#244B3C] transition-opacity hover:opacity-75"
           >
             Explore <span className="text-brand-text">Ethiopia.</span>
           </a>
           <p>Discover the extraordinary, one journey at a time.</p>
-          <a href="#home" className="flex items-center gap-2">
-            Back to top <ArrowUpRight size={14} />
+          <a
+            href="#home"
+            className="group flex items-center gap-2 font-medium text-[#244B3C] transition-colors hover:text-[#9B7430]"
+          >
+            Back to top
+            <ArrowUpRight
+              size={14}
+              className="transition-transform duration-300 group-hover:-translate-y-1"
+            />
           </a>
         </div>
       </footer>

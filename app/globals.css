@@ -57,34 +57,41 @@
 }
 
 :root {
-  --background: #f8f8f5;
-  --foreground: #20221c;
-  --card: #ffffff;
-  --card-foreground: #20221c;
-  --popover: #ffffff;
-  --popover-foreground: #20221c;
-  --primary: #20251a;
-  --primary-foreground: #ffffff;
-  --secondary: #eef0e6;
-  --secondary-foreground: #20251a;
-  --muted: #ecefe4;
-  --muted-foreground: #6b6f62;
-  --accent: #eef0e6;
-  --accent-foreground: #20251a;
+  --background: #FAF7F0;
+  --foreground: #292D25;
+  --card: #FFFFFF;
+  --card-foreground: #292D25;
+  --popover: #FFFFFF;
+  --popover-foreground: #292D25;
+
+  --primary: #244B3C;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #EDE7D9;
+  --secondary-foreground: #292D25;
+
+  --muted: #F0EBE1;
+  --muted-foreground: #706F63;
+
+  --accent: #EDE7D9;
+  --accent-foreground: #244B3C;
+
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #e2e4d9;
-  --input: #e2e4d9;
-  --ring: oklch(0.708 0 0);
-  /* Lime brand */
-  --brand: #c3ed31; /* fills: buttons, dots, badges */
-  --brand-foreground: #20251a; /* text/icons placed on --brand */
-  --brand-accent: #a4c532; /* decorative icons (stars, mountain) on page bg */
-  --brand-text: #6f8a14; /* lime text on page bg, readable on light */
+  --border: #E5DED0;
+  --input: #E5DED0;
+  --ring: #C69A45;
+
+  --brand: #244B3C;
+  --brand-foreground: #FFFFFF;
+  --brand-accent: #C69A45;
+  --brand-text: #244B3C;
+
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -96,35 +103,43 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+
 .dark {
-  --background: #12140f;
-  --foreground: #f1f2ea;
-  --card: #1b1e16;
-  --card-foreground: #f1f2ea;
-  --popover: #1b1e16;
-  --popover-foreground: #f1f2ea;
-  --primary: #c3ed31;
-  --primary-foreground: #12140f;
-  --secondary: #262a20;
-  --secondary-foreground: #f1f2ea;
-  --muted: #1d2018;
-  --muted-foreground: #a3a898;
-  --accent: #262a20;
-  --accent-foreground: #f1f2ea;
+  --background: #191F1A;
+  --foreground: #F5F1E8;
+  --card: #232B24;
+  --card-foreground: #F5F1E8;
+  --popover: #232B24;
+  --popover-foreground: #F5F1E8;
+
+  --primary: #D5B574;
+  --primary-foreground: #191F1A;
+
+  --secondary: #30372D;
+  --secondary-foreground: #F5F1E8;
+
+  --muted: #272E27;
+  --muted-foreground: #B7B9AA;
+
+  --accent: #30372D;
+  --accent-foreground: #F5F1E8;
+
   --destructive: oklch(0.704 0.191 22.216);
-  --border: #2a2d24;
-  --input: #33372c;
-  --ring: oklch(0.556 0 0);
-  /* Lime brand: bright lime reads well on the dark background */
-  --brand: #c3ed31;
-  --brand-foreground: #20251a;
-  --brand-accent: #c3ed31;
-  --brand-text: #c3ed31;
+  --border: #394138;
+  --input: #394138;
+  --ring: #D5B574;
+
+  --brand: #D5B574;
+  --brand-foreground: #191F1A;
+  --brand-accent: #D5B574;
+  --brand-text: #D5B574;
+
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);

@@ -19,12 +19,12 @@ function GalleryImage({
 
   return (
     <div
-      className={cn("relative overflow-hidden rounded-2xl bg-muted", className)}
+      className={cn("group relative overflow-hidden rounded-3xl border border-border/40 bg-[#F0EBE1] shadow-sm", className)}
     >
       <img
         src={url}
         alt={alt}
-        className="absolute inset-0 size-full object-contain"
+        className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
       />
     </div>
   );
@@ -61,7 +61,7 @@ export function DestinationGallery({
   // 3 images: main on the left, two stacked on the right
   // 4 images: main on the left, one wide image on top and two below on the right
   return (
-    <div className="grid gap-2 sm:h-[26rem] sm:grid-cols-2 sm:grid-rows-1">
+    <div className="grid gap-3 sm:h-[29rem] sm:grid-cols-2 sm:grid-rows-1">
       <GalleryImage fileKey={main} alt={title} className="h-72 sm:h-auto" />
 
       <div

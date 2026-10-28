@@ -38,7 +38,7 @@ export default function DestinationsNavbar({ user }: DestinationsNavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 w-full border-b border-border/70 bg-background/90 shadow-sm backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full items-center justify-between px-5 sm:px-8 lg:px-12">
         {/* Left: back + brand */}
         <div className="flex items-center gap-3">
@@ -55,17 +55,17 @@ export default function DestinationsNavbar({ user }: DestinationsNavbarProps) {
 
           <span className="h-5 w-px bg-border" />
 
-          <Link href="/destinations" className="flex items-center gap-2">
-            <span className="flex size-7 items-center justify-center rounded-full border-2 border-foreground/20">
-              <span className="size-3.5 rounded-full bg-brand" />
+          <Link href="/destinations" className="group flex items-center gap-2">
+            <span className="flex size-8 items-center justify-center rounded-full border-2 border-brand/40 transition-transform duration-300 group-hover:rotate-12">
+              <span className="size-3.5 rounded-full bg-[#C69A45] transition-transform duration-300 group-hover:scale-110" />
             </span>
             <span className="text-base font-semibold tracking-tight">
-              Explore <span className="text-brand">Ethiopia</span>
+              Explore <span className="text-[#C69A45]">Ethiopia</span>
             </span>
           </Link>
 
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <span className="text-sm ml-4">Dashboard</span>
+          <Link href="/dashboard" className="ml-2 hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-brand sm:flex">
+            <span>Dashboard</span>
           </Link>
         </div>
 
@@ -151,7 +151,7 @@ export default function DestinationsNavbar({ user }: DestinationsNavbarProps) {
           ) : (
             <Link
               href="/login"
-              className="hidden items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-brand-foreground transition hover:brightness-110 sm:inline-flex"
+              className="hidden items-center gap-2 rounded-full border border-[#C69A45]/40 bg-[#244B3C] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#315B49] sm:inline-flex"
             >
               <LogIn size={16} />
               Log in
